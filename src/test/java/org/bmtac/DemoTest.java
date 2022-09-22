@@ -1,14 +1,10 @@
 package org.bmtac;
 
 
-import org.bmtac.contract.AssetTransfer;
-import org.bmtac.cpabe.Cpabe;
 import org.hyperledger.fabric.contract.Context;
 import org.hyperledger.fabric.shim.ChaincodeStub;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import static org.mockito.Mockito.mock;
