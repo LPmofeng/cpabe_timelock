@@ -1,6 +1,7 @@
 package org.bmtac;
 
 
+import org.bmtac.contract.Cpabe;
 import org.hyperledger.fabric.contract.Context;
 import org.hyperledger.fabric.shim.ChaincodeStub;
 import org.junit.jupiter.api.Test;
