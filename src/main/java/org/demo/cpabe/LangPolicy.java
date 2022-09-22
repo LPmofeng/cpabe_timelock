@@ -1,4 +1,4 @@
-package org.bmtac.cpabe;
+package org.demo.cpabe;
 
 import java.util.ArrayList;
 import java.util.Collections;

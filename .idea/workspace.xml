@@ -70,12 +70,26 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="cpabe_timelock" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="cpabe_timelock" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="cpabe_timelock" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="distribution" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -141,7 +155,7 @@
       <recent name="org.bmtac.util" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DemoTest.demoTest">
+  <component name="RunManager" selected="JUnit.DemoTest">
     <configuration name="Demo (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.bmtac.contract.Demo" />
       <module name="cpabe_timelock.main" />
@@ -159,7 +173,7 @@
       <option name="MAIN_CLASS_NAME" value="org.bmtac.cpabe.Demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.bmtac.cpabe.*" />
+          <option name="PATTERN" value="org.demo.cpabe.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -167,34 +181,51 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AssetTransferTest.invokeBMTACTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.bmtac.contract.Demo" />
+      <module name="cpabe_timelock.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.demo.contract.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CPABE_TimeLock [installDist]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="installDist" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="DemoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cpabe_timelock.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.bmtac.*" />
+          <option name="PATTERN" value="org.demo.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.bmtac" />
-      <option name="MAIN_CLASS_NAME" value="org.bmtac.AssetTransferTest" />
-      <option name="METHOD_NAME" value="invokeBMTACTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AssetTransferTest.invokeBMTACTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="bmtac.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.bmtac.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.bmtac" />
-      <option name="MAIN_CLASS_NAME" value="org.bmtac.AssetTransferTest" />
-      <option name="METHOD_NAME" value="invokeBMTACTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="org.demo.DemoTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -203,12 +234,12 @@
       <module name="cpabe_timelock.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.bmtac.*" />
+          <option name="PATTERN" value="org.demo.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.bmtac" />
-      <option name="MAIN_CLASS_NAME" value="org.bmtac.DemoTest" />
+      <option name="MAIN_CLASS_NAME" value="org.demo.DemoTest" />
       <option name="METHOD_NAME" value="demoTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -230,11 +261,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DemoTest" />
+        <item itemvalue="Gradle.CPABE_TimeLock [installDist]" />
         <item itemvalue="JUnit.DemoTest.demoTest" />
         <item itemvalue="Application.Demo (1)" />
         <item itemvalue="Application.Demo" />
-        <item itemvalue="JUnit.AssetTransferTest.invokeBMTACTest" />
-        <item itemvalue="JUnit.AssetTransferTest.invokeBMTACTest (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -320,7 +351,7 @@
       <workItem from="1663565905699" duration="842000" />
       <workItem from="1663736532699" duration="219000" />
       <workItem from="1663765552932" duration="7811000" />
-      <workItem from="1663810584478" duration="1554000" />
+      <workItem from="1663810584478" duration="2236000" />
     </task>
     <servers />
   </component>
@@ -351,7 +382,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/SerializeUtils.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/org/demo/cpabe/SerializeUtils.java</url>
           <line>69</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>

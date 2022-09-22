@@ -1,4 +1,4 @@
-package org.bmtac.cpabe;
+package org.demo.cpabe;
 
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;

@@ -1,8 +1,8 @@
-package org.bmtac.contract;
+package org.demo.contract;
 
 import it.unisa.dia.gas.jpbc.Element;
 import org.apache.log4j.Logger;
-import org.bmtac.cpabe.*;
+import org.demo.cpabe.*;
 import org.hyperledger.fabric.contract.Context;
 import org.hyperledger.fabric.contract.ContractInterface;
 import org.hyperledger.fabric.contract.annotation.Contract;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-@Contract(name = "basic")
+@Contract(name = "demo")
 @Default
 public class Cpabe implements ContractInterface {
 	private final Logger log = Logger.getLogger(Cpabe.class);

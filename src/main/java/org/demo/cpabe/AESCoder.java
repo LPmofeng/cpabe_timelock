@@ -1,4 +1,4 @@
-package org.bmtac.cpabe;
+package org.demo.cpabe;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;

@@ -1,4 +1,4 @@
-package org.bmtac.cpabe;
+package org.demo.cpabe;
 
 import edu.princeton.cs.algs4.Out;
 import it.unisa.dia.gas.jpbc.Element;
@@ -8,7 +8,6 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
 import it.unisa.dia.gas.plaf.jpbc.pairing.a.TypeACurveGenerator;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
