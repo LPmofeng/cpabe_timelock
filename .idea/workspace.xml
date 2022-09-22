@@ -5,54 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ef063f9-6018-407e-bb34-4133eecff2cf" name="变更" comment="变更">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/keystore/cpabe/cpabe.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/keystore/cpabe/master_key" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/keystore/cpabe/prv_key" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/keystore/cpabe/pub_key" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/keystore/cpabe/url.text" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/keystore/cpabe/url.text.cpabe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/keystore/cpabe/url.text.new" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/contract/Cpabe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/AESCoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/Bswabe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabeCph.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabeCphKey.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabeElementBoolean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabeMsk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabePolicy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabePolynomial.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabePrv.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabePrvComp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabePub.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/Common.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/Cpabe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/LangPolicy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/SerializeUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/bmtac/DemoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/authority/AuthPublicKey.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/authority/AuthSecretKey.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/authority/Authority.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/ciphertext/AccessStructure.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/ciphertext/Ciphertext.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/ciphertext/DKToken.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/ciphertext/TreeNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/contract/AssetTransfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/contract/AssetTransfer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/globalAuthority/GlobalParam.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/timeToken/TimeToken.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/userKey/UserAuthorityKey.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/userKey/Userkeys.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/util/AccessPolicyUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/util/GenUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/util/IOUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/util/ShowTreeeUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/bmtac/AssetTransferTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/bmtac/AssetTransferTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/bmtac/ShamirTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -351,7 +305,7 @@
       <workItem from="1663565905699" duration="842000" />
       <workItem from="1663736532699" duration="219000" />
       <workItem from="1663765552932" duration="7811000" />
-      <workItem from="1663810584478" duration="3418000" />
+      <workItem from="1663810584478" duration="4552000" />
     </task>
     <servers />
   </component>
