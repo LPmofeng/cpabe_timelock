@@ -1,0 +1,84 @@
+plugins {
+    //  gradle的插件，shadow这个插件可以构建的时候把引用的jar包合进去
+    id 'java'
+    //  Gradle使用shadow插件构建jar,加上此插件后会生成一个shadowJar的task
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    //    使用Gradle Application Plugin插件自动生成可执行.sh和.bat启动脚本
+    id 'application'
+}
+
+group 'org.bmtac'
+version '1.0-SNAPSHOT'
+
+repositories {
+    //配置从中央仓库寻找
+    mavenCentral()
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    //代码托管库：设置之后可以在项目中轻松引用jcenter上的开源项目
+    // Use JCenter for resolving dependencies.
+    // jcenter()
+    // 这里是本地maven仓库地址,没有就会依次向下设置的地址寻找
+    //配置先从本地仓库寻找jar包，优先寻找上一个配置，找到不执行下面的配置
+    maven { url 'https://maven.aliyun.com/repository/public' }
+    maven { url 'https://maven.aliyun.com/repository/google' }
+    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    maven {
+        url "https://hyperledger.jfrog.io/hyperledger/fabric-maven"
+    }
+    maven {
+        url 'https://jitpack.io'
+    }
+    //第三方仓库
+    google()
+}
+
+dependencies {
+    // 依赖libs目录下所有以.jar结尾的文件
+    // complie fileTree(dir: 'src/main/resource/lib', include: ['*.jar'])
+    //    implementation files('src/main/resource/lib/jpbc-api-2.0.0.jar')
+    //    implementation files('src/main/resource/lib/jpbc-plaf-2.0.0.jar')
+    implementation fileTree(dir: 'lib', includes: ['*.jar'])
+
+    implementation 'org.hyperledger.fabric-chaincode-java:fabric-chaincode-shim:2.4.1'
+    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.75'
+    implementation group: 'edu.princeton.cs', name: 'algs4', version: '1.0.3'
+    implementation group: 'org.bouncycastle', name: 'bcprov-jdk16', version: '1.46'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
+    implementation group: 'log4j', name: 'log4j', version: '1.2.17'
+    implementation group: 'org.bitcoinj', name: 'bitcoinj-core', version: '0.14.7'
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.14'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.json:json:20211205'
+    implementation 'com.owlike:genson:1.5'
+    implementation group: 'com.alibaba', name: 'easyexcel', version: '2.2.10'
+    implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    // shamir
+    implementation 'com.codahale:shamir:0.7.0'
+
+    testImplementation 'org.assertj:assertj-core:3.11.1'
+    testImplementation 'org.mockito:mockito-core:2.28.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.32'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-core', version: '1.3'
+    testImplementation 'org.hyperledger.fabric-chaincode-java:fabric-chaincode-shim:2.4.1'
+}
+application {
+    mainClass = 'org.hyperledger.fabric.contract.ContractRouter'
+}
+mainClassName = 'org.hyperledger.fabric.contract.ContractRouter'
+shadowJar {
+    //构建的jar包的名字
+    baseName = 'chaincode'
+    //构建的jar包的版本，会追加到archivesBaseName的后面
+    version = null
+    classifier = null
+
+    manifest {
+        //指定入口函数，其他的是默认
+        attributes 'Main-Class': 'org.hyperledger.fabric.contract.ContractRouter'
+    }
+}
+installDist.dependsOn check

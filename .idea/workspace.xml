@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9ef063f9-6018-407e-bb34-4133eecff2cf" name="变更" comment="变更">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/keystore/cpabe/cpabe.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/keystore/cpabe/master_key" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/keystore/cpabe/prv_key" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/keystore/cpabe/pub_key" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/keystore/cpabe/url.text" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/keystore/cpabe/url.text.cpabe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/keystore/cpabe/url.text.new" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/contract/Cpabe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/AESCoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/Bswabe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabeCph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabeCphKey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabeElementBoolean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabeMsk.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabePolicy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabePolynomial.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabePrv.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabePrvComp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/BswabePub.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/Common.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/Cpabe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/LangPolicy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/SerializeUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/bmtac/DemoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/authority/AuthPublicKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/authority/AuthSecretKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/authority/Authority.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/ciphertext/AccessStructure.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/ciphertext/Ciphertext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/ciphertext/DKToken.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/ciphertext/TreeNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/contract/AssetTransfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/bmtac/contract/AssetTransfer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/globalAuthority/GlobalParam.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/timeToken/TimeToken.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/userKey/UserAuthorityKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/userKey/Userkeys.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/util/AccessPolicyUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/util/GenUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/util/IOUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/bmtac/util/ShowTreeeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/bmtac/AssetTransferTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/bmtac/AssetTransferTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/bmtac/ShamirTest.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="cpabe_timelock" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../../../../resources/apache-maven-3.6.1" />
+        <option name="userSettingsFile" value="$PROJECT_DIR$/../../../../../../../resources/apache-maven-3.6.1/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="29BVaevZQONvhKSoeUHnnAvaIEL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/keystore/cpabe" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\外快\李博伦\CPABE_TimeLock\keystore\cpabe" />
+      <recent name="D:\外快\李博伦\CPABE_TimeLock\lib" />
+      <recent name="D:\外快\李博伦\CPABE_TimeLock\src\main\java\org\bmtac\cpabe" />
+      <recent name="$PROJECT_DIR$/src/main/java/org/bmtac/contract" />
+      <recent name="$PROJECT_DIR$/src/test/java/org/bmtac" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.bmtac.contract" />
+      <recent name="org.bmtac.cpabe" />
+      <recent name="org.bmtac" />
+      <recent name="org.bmtac.authority" />
+      <recent name="org.bmtac.util" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.DemoTest.demoTest">
+    <configuration name="Demo (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.bmtac.contract.Demo" />
+      <module name="cpabe_timelock.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.bmtac.contract.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.bmtac.cpabe.Demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.bmtac.cpabe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AssetTransferTest.invokeBMTACTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cpabe_timelock.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.bmtac.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.bmtac" />
+      <option name="MAIN_CLASS_NAME" value="org.bmtac.AssetTransferTest" />
+      <option name="METHOD_NAME" value="invokeBMTACTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AssetTransferTest.invokeBMTACTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bmtac.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.bmtac.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.bmtac" />
+      <option name="MAIN_CLASS_NAME" value="org.bmtac.AssetTransferTest" />
+      <option name="METHOD_NAME" value="invokeBMTACTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoTest.demoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cpabe_timelock.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.bmtac.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.bmtac" />
+      <option name="MAIN_CLASS_NAME" value="org.bmtac.DemoTest" />
+      <option name="METHOD_NAME" value="demoTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="BMTAC.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="BMTAC.main" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DemoTest.demoTest" />
+        <item itemvalue="Application.Demo (1)" />
+        <item itemvalue="Application.Demo" />
+        <item itemvalue="JUnit.AssetTransferTest.invokeBMTACTest" />
+        <item itemvalue="JUnit.AssetTransferTest.invokeBMTACTest (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="9ef063f9-6018-407e-bb34-4133eecff2cf" name="变更" comment="" />
+      <created>1652586530857</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652586530857</updated>
+      <workItem from="1652586533257" duration="3225000" />
+      <workItem from="1652603621985" duration="205000" />
+      <workItem from="1652603919978" duration="877000" />
+      <workItem from="1652606470233" duration="121000" />
+      <workItem from="1652614095683" duration="606000" />
+      <workItem from="1652617424770" duration="130000" />
+      <workItem from="1652617561459" duration="56000" />
+      <workItem from="1652661033685" duration="355000" />
+      <workItem from="1652661663802" duration="395000" />
+      <workItem from="1652662503552" duration="399000" />
+      <workItem from="1652663527777" duration="566000" />
+      <workItem from="1652664509236" duration="139000" />
+      <workItem from="1652665203420" duration="106000" />
+      <workItem from="1652667760700" duration="399000" />
+      <workItem from="1652668395209" duration="418000" />
+      <workItem from="1652669314795" duration="684000" />
+      <workItem from="1652670013327" duration="27000" />
+      <workItem from="1652670255625" duration="387000" />
+      <workItem from="1652671008694" duration="936000" />
+      <workItem from="1652685518737" duration="603000" />
+      <workItem from="1652686493600" duration="53000" />
+      <workItem from="1652688957313" duration="40000" />
+      <workItem from="1652691625879" duration="1610000" />
+      <workItem from="1652704615611" duration="1340000" />
+      <workItem from="1652747655510" duration="21463000" />
+      <workItem from="1652855829284" duration="178000" />
+      <workItem from="1652856910413" duration="2090000" />
+      <workItem from="1652860381153" duration="139000" />
+      <workItem from="1652860732995" duration="1277000" />
+      <workItem from="1652862330766" duration="124000" />
+      <workItem from="1652863358134" duration="220000" />
+      <workItem from="1652863776633" duration="105000" />
+      <workItem from="1652864069937" duration="167000" />
+      <workItem from="1652864508396" duration="209000" />
+      <workItem from="1652865138936" duration="858000" />
+      <workItem from="1652924713013" duration="856000" />
+      <workItem from="1652927003456" duration="1942000" />
+      <workItem from="1652929390522" duration="1376000" />
+      <workItem from="1652930943158" duration="4074000" />
+      <workItem from="1652938558024" duration="717000" />
+      <workItem from="1652939501956" duration="2869000" />
+      <workItem from="1652942644054" duration="6258000" />
+      <workItem from="1652949140048" duration="11126000" />
+      <workItem from="1653007797603" duration="17931000" />
+      <workItem from="1653096942126" duration="444000" />
+      <workItem from="1653097620544" duration="12105000" />
+      <workItem from="1653188738287" duration="763000" />
+      <workItem from="1653266240081" duration="2543000" />
+      <workItem from="1653272496400" duration="493000" />
+      <workItem from="1653273246630" duration="264000" />
+      <workItem from="1653273710069" duration="6602000" />
+      <workItem from="1653288703420" duration="9287000" />
+      <workItem from="1653352309214" duration="1919000" />
+      <workItem from="1653354605767" duration="2425000" />
+      <workItem from="1653377426750" duration="3317000" />
+      <workItem from="1653439494474" duration="1781000" />
+      <workItem from="1653445422052" duration="1840000" />
+      <workItem from="1653474169874" duration="5769000" />
+      <workItem from="1653527034231" duration="4533000" />
+      <workItem from="1653532158773" duration="5032000" />
+      <workItem from="1653612545321" duration="1516000" />
+      <workItem from="1653614371435" duration="11742000" />
+      <workItem from="1653655865756" duration="364000" />
+      <workItem from="1653790269426" duration="20152000" />
+      <workItem from="1655254007583" duration="156000" />
+      <workItem from="1655869753686" duration="89000" />
+      <workItem from="1655880284989" duration="132000" />
+      <workItem from="1655899515736" duration="3098000" />
+      <workItem from="1656471431363" duration="703000" />
+      <workItem from="1663405182368" duration="10319000" />
+      <workItem from="1663554762032" duration="1638000" />
+      <workItem from="1663565905699" duration="842000" />
+      <workItem from="1663736532699" duration="219000" />
+      <workItem from="1663765552932" duration="7811000" />
+      <workItem from="1663810584478" duration="150000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/bmtac/cpabe/SerializeUtils.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
