@@ -27,7 +27,7 @@ import java.util.Comparator;
 
 @Contract(name = "demo")
 @Default
-public class Bswabe implements ContractInterface {
+public final class Bswabe implements ContractInterface {
 
     private final Genson genson = new Genson();
 
