@@ -124,13 +124,13 @@
       <recent name="org.bmtac.authority" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DemoTest.demoTest (1)">
-    <configuration name="SM2Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.demo.SM2Test" />
-      <module name="demo.test" />
+  <component name="RunManager" selected="JUnit.CpabeMock.cpabeDemoTest">
+    <configuration name="LangPolicy" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.demo.cpabe.LangPolicy" />
+      <module name="demo.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.demo.*" />
+          <option name="PATTERN" value="org.demo.cpabe.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -138,7 +138,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DemoTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="CpabeMock.cpabeDemoTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -151,7 +151,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.demo.DemoTest&quot;" />
+            <option value="&quot;org.demo.CpabeMock.cpabeDemoTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -184,6 +184,22 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="CpabeMock.cpabeDemoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.demo" />
+      <option name="MAIN_CLASS_NAME" value="org.demo.CpabeMock" />
+      <option name="METHOD_NAME" value="cpabeDemoTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DemoTest.demoTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="demo.test" />
       <extension name="coverage">
@@ -195,22 +211,6 @@
       <option name="PACKAGE_NAME" value="org.demo" />
       <option name="MAIN_CLASS_NAME" value="org.demo.DemoTest" />
       <option name="METHOD_NAME" value="demoTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SM2Test.sm2Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="demo.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.demo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.demo" />
-      <option name="MAIN_CLASS_NAME" value="org.demo.SM2Test" />
-      <option name="METHOD_NAME" value="sm2Test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -231,11 +231,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CpabeMock.cpabeDemoTest" />
+        <item itemvalue="Gradle.CpabeMock.cpabeDemoTest" />
         <item itemvalue="JUnit.DemoTest.demoTest (1)" />
+        <item itemvalue="Application.LangPolicy" />
         <item itemvalue="Gradle.DemoTest.demoTest (1)" />
-        <item itemvalue="Gradle.DemoTest" />
-        <item itemvalue="JUnit.SM2Test.sm2Test" />
-        <item itemvalue="Application.SM2Test" />
       </list>
     </recent_temporary>
   </component>
@@ -328,7 +328,7 @@
       <workItem from="1663850755000" duration="9000" />
       <workItem from="1663850862328" duration="629000" />
       <workItem from="1664020882742" duration="19000" />
-      <workItem from="1664021293087" duration="17687000" />
+      <workItem from="1664021293087" duration="22257000" />
     </task>
     <servers />
   </component>

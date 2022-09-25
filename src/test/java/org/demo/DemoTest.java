@@ -28,7 +28,9 @@ public class DemoTest {
 
     static String url = "https://www.baidu.com";
 
-    static String[] attr = {"baf1", "fim1", "foo"};
+    // static String[] attr = {"baf1", "fim1", "foo"};
+    static String attr = "baf1,fim1,foo";
+
     static String policy = "foo bar fim 2of3 baf 1of2";
 
     static String student_attr = "objectClass:inetOrgPerson objectClass:organizationalPerson "
@@ -50,11 +52,11 @@ public class DemoTest {
         println("//end to setup");
 
         println("//start to keygen");
-        test.keygen(pubfile, prvfile, mskfile, student_attr);
+        test.keygen(pubfile, prvfile, mskfile, attr);
         println("//end to keygen");
 
         println("//start to enc");
-        test.enc(pubfile, student_policy, inputfile, encfile);
+        test.enc(pubfile, policy, inputfile, encfile);
         println("//end to enc");
 
         println("//start to dec");

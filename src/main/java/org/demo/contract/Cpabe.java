@@ -3,6 +3,8 @@ package org.demo.contract;
 import com.alibaba.fastjson.JSON;
 import it.unisa.dia.gas.jpbc.Element;
 import org.demo.cpabe.*;
+import org.demo.pojo.CT;
+import org.demo.pojo.Keys;
 import org.hyperledger.fabric.contract.Context;
 import org.hyperledger.fabric.contract.ContractInterface;
 import org.hyperledger.fabric.contract.annotation.Contract;
@@ -18,12 +20,13 @@ import java.util.Arrays;
 @Default
 public class Cpabe implements ContractInterface {
     static Bswabe bswabe = new Bswabe();
+
     /**
      * @param
      * @author Junwei Wang(wakemecn@gmail.com)
      */
     @Transaction(intent = Transaction.TYPE.SUBMIT)
-    public void setup(final Context ctx) {
+    public Keys setup(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
         byte[] pub_byte, msk_byte;
         BswabePub pub = new BswabePub();
@@ -32,7 +35,7 @@ public class Cpabe implements ContractInterface {
 
         /* store BswabePub into mskfile */
         pub_byte = SerializeUtils.serializeBswabePub(pub);
-        System.out.println(Arrays.toString(pub_byte));
+        // System.out.println(Arrays.toString(pub_byte));
         String pub_json = JSON.toJSONString(pub_byte);
         stub.putStringState("pub", pub_json);
         // System.out.println(json);
@@ -45,6 +48,7 @@ public class Cpabe implements ContractInterface {
         String msk_json = JSON.toJSONString(msk_byte);
         stub.putStringState("msk", msk_json);
         // Common.spitFile(mskfile, msk_byte);
+        return new Keys(pub_json, msk_json);
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
@@ -64,7 +68,7 @@ public class Cpabe implements ContractInterface {
     }
 
     @Transaction(intent = Transaction.TYPE.SUBMIT)
-    public void keygen(final Context ctx, String attr_str) throws NoSuchAlgorithmException {
+    public String keygen(final Context ctx, String attr_str) throws NoSuchAlgorithmException {
         ChaincodeStub stub = ctx.getStub();
         BswabePub pub;
         BswabeMsk msk;
@@ -78,7 +82,8 @@ public class Cpabe implements ContractInterface {
         pub = readPub(ctx);
         msk = readMsk(ctx);
 
-        String[] attr_arr = LangPolicy.parseAttribute(attr_str);
+        // String[] attr_arr = LangPolicy.parseAttribute(attr_str);
+        String[] attr_arr = attr_str.split(",");
         BswabePrv prv = bswabe.keygen(pub, msk, attr_arr);
 
         /* store BswabePrv into prvfile */
@@ -86,6 +91,7 @@ public class Cpabe implements ContractInterface {
         String prv_json = JSON.toJSONString(prv_byte);
         stub.putStringState("prv", prv_json);
         // Common.spitFile(prvfile, prv_byte);
+        return prv_json;
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
@@ -97,7 +103,7 @@ public class Cpabe implements ContractInterface {
     }
 
     @Transaction(intent = Transaction.TYPE.SUBMIT)
-    public void enc(final Context ctx, String policy, String message) throws Exception {
+    public CT enc(final Context ctx, String policy, String message) throws Exception {
         ChaincodeStub stub = ctx.getStub();
         BswabePub pub;
         BswabeCph cph;
@@ -131,6 +137,7 @@ public class Cpabe implements ContractInterface {
         String aes_json = JSON.toJSONString(aesBuf);
         stub.putStringState("aes", aes_json);
         // Common.writeCpabeFile(encfile, cphBuf, aesBuf);
+        return new CT(cph_json, aes_json);
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
@@ -184,5 +191,6 @@ public class Cpabe implements ContractInterface {
         }
         return beb.b;
     }
+
 
 }

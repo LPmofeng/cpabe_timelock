@@ -34,9 +34,6 @@ repositories {
 
 dependencies {
     // 依赖libs目录下所有以.jar结尾的文件
-    // complie fileTree(dir: 'src/main/resource/lib', include: ['*.jar'])
-    //    implementation files('src/main/resource/lib/jpbc-api-2.0.0.jar')
-    //    implementation files('src/main/resource/lib/jpbc-plaf-2.0.0.jar')
     implementation fileTree(dir: 'lib', includes: ['*.jar'])
 
     implementation 'org.hyperledger.fabric-chaincode-java:fabric-chaincode-shim:2.4.1'
@@ -46,6 +43,7 @@ dependencies {
     implementation group: 'log4j', name: 'log4j', version: '1.2.17'
     implementation 'org.bouncycastle:bcpkix-jdk15on:1.57'
     implementation 'commons-codec:commons-codec:1.9'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
     implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.75'
     testImplementation 'org.assertj:assertj-core:3.11.1'
     testImplementation 'org.mockito:mockito-core:2.28.2'

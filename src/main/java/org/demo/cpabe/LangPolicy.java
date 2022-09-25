@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 public class LangPolicy {
 
 	public static String[] parseAttribute(String s) {
-		ArrayList<String> str_arr = new ArrayList<String>();
+		ArrayList<String> str_arr = new ArrayList<>();
 		StringTokenizer st = new StringTokenizer(s);
 		String token;
 		String res[];
@@ -38,6 +38,9 @@ public class LangPolicy {
 		String attr = "objectClass:inetOrgPerson objectClass:organizationalPerson "
 				+ "sn:student2 cn:student2 uid:student2 userPassword:student2 "
 				+ "ou:idp o:computer mail:student2@sdu.edu.cn title:student";
+		// String attr = "objectClass:inetOrgPerson objectClass:organizationalPerson "
+		// 		+ "sn:student2 cn:student2 uid:student2 userPassword:student2 "
+		// 		+ "ou:idp o:computer mail:student2@sdu.edu.cn title:student";
 		String[] arr = parseAttribute(attr);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.println(arr[i]);
