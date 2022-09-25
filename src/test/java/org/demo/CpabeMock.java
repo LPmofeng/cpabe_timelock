@@ -1,6 +1,7 @@
 package org.demo;
 
 import com.alibaba.fastjson.JSON;
+import com.owlike.genson.Genson;
 import org.demo.contract.Bswabe;
 import org.demo.cpabe.AESCoder;
 import org.demo.pojo.CT;
@@ -13,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class CpabeMock {
-
+    private final Genson genson = new Genson();
     @Test
     public void cpabeDemoTest() throws Exception {
         Bswabe contract = new Bswabe();
