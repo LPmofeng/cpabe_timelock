@@ -444,6 +444,7 @@ public class Bswabe {
 
         toks = s.split(",");
 
+
         int toks_cnt = toks.length;
         for (int index = 0; index < toks_cnt; index++) {
             int i, k, n;

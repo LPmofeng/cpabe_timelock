@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
 @Contract(name = "demo")
 @Default
 public class Cpabe implements ContractInterface {
-    static Bswabe bswabe = new Bswabe();
+    final Bswabe bswabe = new Bswabe();
 
     /**
      * @param
