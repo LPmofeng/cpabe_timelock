@@ -29,8 +29,6 @@ cd /usr/local/dev/code/go/src/github.com/hyperledger/fabric-samples/test-network
 
 ```sh
 ./network.sh deployCC -ccn demo -ccp ../cpabe_timelock -ccl java -ccep "OR('Org1MSP.member','Org2MSP.member')"
-
-./network.sh deployCC -ccn demo -ccp ../cpabe_go_lbl -ccl go -ccep "OR('Org1MSP.member','Org2MSP.member')"
 # 官方java智能合约测试
 ./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-go -ccl go -ccep "OR('Org1MSP.member','Org2MSP.member')"
 ```
@@ -61,7 +59,7 @@ export CORE_PEER_ADDRESS=localhost:7051
 peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile ${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt -c '{"function":"InitLedger","Args":[]}'
 
 sh invoke.sh '{"function":"setup","Args":[]}'
-sh invoke.sh '{"function":"keygen","Args":["baf1,fim1,foo"]}'
+sh invoke.sh '{"function":"keygen","Args":["baf,fim,foo"]}'
 sh invoke.sh '{"function":"enc","Args":["foo bar fim 2of3 baf 1of2","www.baidu.com"]}'
 sh invoke.sh '{"function":"dec","Args":[]}'
 

@@ -14,7 +14,6 @@ import org.hyperledger.fabric.shim.ChaincodeStub;
 
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 @Contract(name = "demo")
 @Default
@@ -52,19 +51,21 @@ public class Cpabe implements ContractInterface {
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
-    public BswabePub readPub(final Context ctx) {
+    public byte[] readPub(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
         String pub_json = stub.getStringState("pub");
         byte[] pub_byte = JSON.parseObject(pub_json, byte[].class);
-        return SerializeUtils.unserializeBswabePub(pub_byte);
+        return pub_byte;
+        // return SerializeUtils.unserializeBswabePub(pub_byte);
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
-    public BswabeMsk readMsk(final Context ctx) {
+    public byte[] readMsk(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
         String msk_json = stub.getStringState("msk");
         byte[] msk_byte = JSON.parseObject(msk_json, byte[].class);
-        return SerializeUtils.unserializeBswabeMsk(readPub(ctx), msk_byte);
+        return msk_byte;
+        // return SerializeUtils.unserializeBswabeMsk(SerializeUtils.unserializeBswabePub(pub_byte), msk_byte);
     }
 
     @Transaction(intent = Transaction.TYPE.SUBMIT)
@@ -79,8 +80,8 @@ public class Cpabe implements ContractInterface {
         /* get BswabeMsk from mskfile */
         // msk_byte = Common.suckFile(mskfile);
         // msk = SerializeUtils.unserializeBswabeMsk(pub, msk_byte);
-        pub = readPub(ctx);
-        msk = readMsk(ctx);
+        pub = SerializeUtils.unserializeBswabePub(readPub(ctx));
+        msk = SerializeUtils.unserializeBswabeMsk(pub, readMsk(ctx));
 
         // String[] attr_arr = LangPolicy.parseAttribute(attr_str);
         String[] attr_arr = attr_str.split(",");
@@ -95,11 +96,12 @@ public class Cpabe implements ContractInterface {
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
-    public BswabePrv readPrv(final Context ctx) {
+    public byte[] readPrv(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
         String prv_json = stub.getStringState("prv");
         byte[] prv_byte = JSON.parseObject(prv_json, byte[].class);
-        return SerializeUtils.unserializeBswabePrv(readPub(ctx), prv_byte);
+        // return SerializeUtils.unserializeBswabePrv(readPub(ctx), prv_byte);
+        return prv_byte;
     }
 
     @Transaction(intent = Transaction.TYPE.SUBMIT)
@@ -116,7 +118,7 @@ public class Cpabe implements ContractInterface {
         /* get BswabePub from pubfile */
         // pub_byte = Common.suckFile(pubfile);
         // pub = SerializeUtils.unserializeBswabePub(pub_byte);
-        pub = readPub(ctx);
+        pub = SerializeUtils.unserializeBswabePub(readPub(ctx));
         keyCph = bswabe.enc(pub, policy);
 
         cph = keyCph.cph;
@@ -141,11 +143,12 @@ public class Cpabe implements ContractInterface {
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
-    public BswabeCph readCph(final Context ctx) {
+    public byte[] readCph(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
         String cph_json = stub.getStringState("cph");
         byte[] cph_byte = JSON.parseObject(cph_json, byte[].class);
-        return SerializeUtils.bswabeCphUnserialize(readPub(ctx), cph_byte);
+        return cph_byte;
+        // return SerializeUtils.bswabeCphUnserialize(readPub(ctx), cph_byte);
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
@@ -167,17 +170,17 @@ public class Cpabe implements ContractInterface {
         /* get BswabePub from pubfile */
         // pub_byte = Common.suckFile(pubfile);
         // pub = SerializeUtils.unserializeBswabePub(pub_byte);
-        pub = readPub(ctx);
+        pub = SerializeUtils.unserializeBswabePub(readPub(ctx));
         /* read ciphertext */
         // tmp = Common.readCpabeFile(encfile);
         // aesBuf = tmp[0];
         // cphBuf = tmp[1];
         // cph = SerializeUtils.bswabeCphUnserialize(pub, cphBuf);
-        cph = readCph(ctx);
+        cph = SerializeUtils.bswabeCphUnserialize(pub, readCph(ctx));
         /* get BswabePrv form prvfile */
         // prv_byte = Common.suckFile(prvfile);
         // prv = SerializeUtils.unserializeBswabePrv(pub, prv_byte);
-        prv = readPrv(ctx);
+        prv = SerializeUtils.unserializeBswabePrv(pub, readPrv(ctx));
         aesBuf = readAes(ctx);
         BswabeElementBoolean beb = bswabe.dec(pub, prv, cph);
         System.err.println("e = " + beb.e.toString());
