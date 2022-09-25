@@ -30,7 +30,7 @@ cd /usr/local/dev/code/go/src/github.com/hyperledger/fabric-samples/test-network
 ```sh
 ./network.sh deployCC -ccn demo -ccp ../cpabe_timelock -ccl java -ccep "OR('Org1MSP.member','Org2MSP.member')"
 # 官方java智能合约测试
-./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-go -ccl go -ccep "OR('Org1MSP.member','Org2MSP.member')"
+./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-java -ccl java -ccep "OR('Org1MSP.member','Org2MSP.member')"
 ```
 
 **5.设置执行环境及配置文件路径**

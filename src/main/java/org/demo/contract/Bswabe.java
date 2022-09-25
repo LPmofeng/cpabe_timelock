@@ -30,13 +30,8 @@ import java.util.Comparator;
 public class Bswabe implements ContractInterface {
     /**
      * 初始化配对参数
-     *
-     * @param lambda
-     * @param pairingParametersFileName
      */
     public Pairing initPairingParameter(final Integer lambda, String pairingParametersFileName) {
-        //Global Setup
-//        int lambda = 512;
 //        动态产生的方法非常简单，大概有如下步骤：指定椭圆曲线的种类、产生椭圆曲线参数、初始化Pairing。
 //        Type A曲线需要两个参数：rBit是 Zp 中阶数 p 的比特长度；qBit是 G 中阶数的比特长度。
         File file = new File(pairingParametersFileName);
@@ -261,6 +256,7 @@ public class Bswabe implements ContractInterface {
         stub.putStringState("aes", aes_json);
         return new CT(cph_json, aes_json);
     }
+
     @Transaction(intent = Transaction.TYPE.EVALUATE)
     public byte[] readCph(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
@@ -276,6 +272,7 @@ public class Bswabe implements ContractInterface {
         String aes_json = stub.getStringState("aes");
         return JSON.parseObject(aes_json, byte[].class);
     }
+
     /*
      * Decrypt the specified ciphertext using the given private key, filling in
      * the provided element m (which need not be initialized) with the result.
@@ -321,8 +318,7 @@ public class Bswabe implements ContractInterface {
         return m.toBytes();
     }
 
-    private void decNodeFlatten(Element fx, Element lx, BswabePolicy p,
-                                BswabePrv prv, BswabePub pub) {
+    private void decNodeFlatten(Element fx, Element lx, BswabePolicy p, BswabePrv prv, BswabePub pub) {
         if (p.children == null || p.children.length == 0) {
             decLeafFlatten(fx, lx, p, prv, pub);
         } else {
