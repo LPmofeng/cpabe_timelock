@@ -213,7 +213,7 @@ public class SerializeUtils {
 	
 		for (i = 3; i >= 0; i--) {
 			b = (byte) ((k & (0x000000ff << (i * 8))) >> (i * 8));
-			arrlist.add(Byte.valueOf(b));
+			arrlist.add(b);
 		}
 	}
 
@@ -292,8 +292,8 @@ public class SerializeUtils {
 
 	private static void byteArrListAppend(ArrayList<Byte> arrlist, byte[] b) {
 		int len = b.length;
-		for (int i = 0; i < len; i++) {
-			arrlist.add(Byte.valueOf(b[i]));
+		for (byte value : b) {
+			arrlist.add(value);
 		}
 	}
 
@@ -302,7 +302,7 @@ public class SerializeUtils {
 		byte[] b = new byte[len];
 	
 		for (int i = 0; i < len; i++) {
-			b[i] = B.get(i).byteValue();
+			b[i] = B.get(i);
 		}
 	
 		return b;
