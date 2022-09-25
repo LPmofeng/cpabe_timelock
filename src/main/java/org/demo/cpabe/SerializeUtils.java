@@ -4,6 +4,7 @@ import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
 public class SerializeUtils {
@@ -64,8 +65,8 @@ public class SerializeUtils {
 	}
 
 	public static byte[] serializeBswabePub(BswabePub pub) {
-		ArrayList<Byte> arrlist = new ArrayList<>();
-
+		ArrayList<Byte> arrlist = new ArrayList<Byte>();
+	
 		serializeString(arrlist, pub.pairingParametersFileName);
 		serializeElement(arrlist, pub.g);
 		serializeElement(arrlist, pub.h);
@@ -84,9 +85,8 @@ public class SerializeUtils {
 	
 		StringBuffer sb = new StringBuffer("");
 		offset = unserializeString(b, offset, sb);
-		pub.pairingParametersFileName = sb.substring(0);
-		pub.p = PairingFactory.getPairing(pub.pairingParametersFileName);
-		Pairing pairing = pub.p;
+		Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
+
 	
 		pub.g = pairing.getG1().newElement();
 		pub.h = pairing.getG1().newElement();
@@ -115,9 +115,9 @@ public class SerializeUtils {
 	public static BswabeMsk unserializeBswabeMsk(BswabePub pub, byte[] b) {
 		int offset = 0;
 		BswabeMsk msk = new BswabeMsk();
-	
-		msk.beta = pub.p.getZr().newElement();
-		msk.g_alpha = pub.p.getG2().newElement();
+		Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
+		msk.beta = pairing.getZr().newElement();
+		msk.g_alpha = pairing.getG2().newElement();
 	
 		offset = unserializeElement(b, offset, msk.beta);
 		offset = unserializeElement(b, offset, msk.g_alpha);
@@ -151,8 +151,8 @@ public class SerializeUtils {
 	
 		prv = new BswabePrv();
 		offset = 0;
-	
-		prv.d = pub.p.getG2().newElement();
+		Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
+		prv.d = pairing.getG2().newElement();
 		offset = unserializeElement(b, offset, prv.d);
 	
 		prv.comps = new ArrayList<BswabePrvComp>();
@@ -166,8 +166,8 @@ public class SerializeUtils {
 			offset = unserializeString(b, offset, sb);
 			c.attr = sb.substring(0);
 	
-			c.d = pub.p.getG2().newElement();
-			c.dp = pub.p.getG2().newElement();
+			c.d = pairing.getG2().newElement();
+			c.dp = pairing.getG2().newElement();
 	
 			offset = unserializeElement(b, offset, c.d);
 			offset = unserializeElement(b, offset, c.dp);
@@ -191,9 +191,9 @@ public class SerializeUtils {
 		BswabeCph cph = new BswabeCph();
 		int offset = 0;
 		int[] offset_arr = new int[1];
-
-		cph.cs = pub.p.getGT().newElement();
-		cph.c = pub.p.getG1().newElement();
+		Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
+		cph.cs = pairing.getGT().newElement();
+		cph.c = pairing.getG1().newElement();
 
 		offset = SerializeUtils.unserializeElement(cphBuf, offset, cph.cs);
 		offset = SerializeUtils.unserializeElement(cphBuf, offset, cph.c);
@@ -213,7 +213,7 @@ public class SerializeUtils {
 	
 		for (i = 3; i >= 0; i--) {
 			b = (byte) ((k & (0x000000ff << (i * 8))) >> (i * 8));
-			arrlist.add(b);
+			arrlist.add(Byte.valueOf(b));
 		}
 	}
 
@@ -257,7 +257,7 @@ public class SerializeUtils {
 		p.k = unserializeUint32(arr, offset[0]);
 		offset[0] += 4;
 		p.attr = null;
-	
+		Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
 		/* children */
 		n = unserializeUint32(arr, offset[0]);
 		offset[0] += 4;
@@ -268,8 +268,8 @@ public class SerializeUtils {
 			offset[0] = unserializeString(arr, offset[0], sb);
 			p.attr = sb.substring(0);
 	
-			p.c = pub.p.getG1().newElement();
-			p.cp = pub.p.getG1().newElement();
+			p.c = pairing.getG1().newElement();
+			p.cp = pairing.getG1().newElement();
 	
 			offset[0] = unserializeElement(arr, offset[0], p.c);
 			offset[0] = unserializeElement(arr, offset[0], p.cp);
@@ -292,8 +292,8 @@ public class SerializeUtils {
 
 	private static void byteArrListAppend(ArrayList<Byte> arrlist, byte[] b) {
 		int len = b.length;
-		for (byte value : b) {
-			arrlist.add(value);
+		for (int i = 0; i < len; i++) {
+			arrlist.add(Byte.valueOf(b[i]));
 		}
 	}
 
@@ -302,7 +302,7 @@ public class SerializeUtils {
 		byte[] b = new byte[len];
 	
 		for (int i = 0; i < len; i++) {
-			b[i] = B.get(i);
+			b[i] = B.get(i).byteValue();
 		}
 	
 		return b;

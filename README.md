@@ -1,5 +1,5 @@
 1. git
-   git add ./
+   git add .
    git commit -m "test"
    git push origin main 
 2. 清空所有未使用的docker挂载信息（慎用）
@@ -19,8 +19,12 @@
 
 5. 打包、安装、审批、提交
    ./network.sh deployCC -ccn demo -ccp ../cpabe_timelock -ccl java -ccep "OR('Org1MSP.member','Org2MSP.member')"
+
+   ./network.sh deployCC -ccn demo -ccp ../cpabe_timelock -ccl go -ccep "OR('Org1MSP.member','Org2MSP.member')"
    # 官方java智能合约测试
    ./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-java -ccl java -ccep "OR('Org1MSP.member','Org2MSP.member')"
+
+
 
 5.设置执行环境及配置文件路径
 
@@ -51,7 +55,7 @@
      
     
     # 生成公共参数
-    sh invoke.sh '{"function":"setup","Args":["keystore/cpabe/pub_key","keystore/cpabe/master_key"]}'
+    sh invoke.sh '{"function":"GenerateMasterKeys","Args":[]}'
     # 查询GP
     peer chaincode query -C mychannel -n bmtac -c '{"Args":["getGP","GP"]}'
 

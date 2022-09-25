@@ -5,8 +5,8 @@ import org.hyperledger.fabric.contract.ContractInterface;
 import org.hyperledger.fabric.contract.annotation.Contract;
 import org.hyperledger.fabric.contract.annotation.Default;
 
-@Contract(name = "basic")
-@Default
+// @Contract(name = "basic")
+// @Default
 public class AssetTransfer implements ContractInterface {
     private final Logger log = Logger.getLogger(AssetTransfer.class);
 

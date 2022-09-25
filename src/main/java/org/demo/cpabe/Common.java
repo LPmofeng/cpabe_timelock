@@ -35,8 +35,9 @@ public class Common {
 		os.write(aesBuf);
 
 		/* write cph_buf */
-		for (i = 3; i >= 0; i--)
+		for (i = 3; i >= 0; i--) {
 			os.write(((cphBuf.length & (0xff << 8 * i)) >> 8 * i));
+		}
 		os.write(cphBuf);
 
 		os.close();
@@ -51,16 +52,18 @@ public class Common {
 
 		/* read aes buf */
 		len = 0;
-		for (i = 3; i >= 0; i--)
+		for (i = 3; i >= 0; i--) {
 			len |= is.read() << (i * 8);
+		}
 		aesBuf = new byte[len];
 
 		is.read(aesBuf);
 
 		/* read cph buf */
 		len = 0;
-		for (i = 3; i >= 0; i--)
+		for (i = 3; i >= 0; i--) {
 			len |= is.read() << (i * 8);
+		}
 		cphBuf = new byte[len];
 
 		is.read(cphBuf);
@@ -84,13 +87,15 @@ public class Common {
 		os.write(mBuf);
 
 		/* write aes_buf */
-		for (i = 3; i >= 0; i--)
+		for (i = 3; i >= 0; i--) {
 			os.write(((aesBuf.length & (0xff << 8 * i)) >> 8 * i));
+		}
 		os.write(aesBuf);
 
 		/* write cph_buf */
-		for (i = 3; i >= 0; i--)
+		for (i = 3; i >= 0; i--) {
 			os.write(((cphBuf.length & (0xff << 8 * i)) >> 8 * i));
+		}
 		os.write(cphBuf);
 
 		os.close();
@@ -107,21 +112,24 @@ public class Common {
 
 		/* read m buf */
 		len = 0;
-		for (i = 3; i >= 0; i--)
+		for (i = 3; i >= 0; i--) {
 			len |= is.read() << (i * 8);
+		}
 		mBuf = new byte[len];
 		is.read(mBuf);
 		/* read aes buf */
 		len = 0;
-		for (i = 3; i >= 0; i--)
+		for (i = 3; i >= 0; i--) {
 			len |= is.read() << (i * 8);
+		}
 		aesBuf = new byte[len];
 		is.read(aesBuf);
 
 		/* read cph buf */
 		len = 0;
-		for (i = 3; i >= 0; i--)
+		for (i = 3; i >= 0; i--) {
 			len |= is.read() << (i * 8);
+		}
 		cphBuf = new byte[len];
 		is.read(cphBuf);
 

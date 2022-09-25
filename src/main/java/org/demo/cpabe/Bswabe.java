@@ -15,14 +15,13 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Bswabe {
-
     /**
      * 初始化配对参数
      *
      * @param lambda
      * @param pairingParametersFileName
      */
-    public static Pairing InitPairingParameter(final Integer lambda, String pairingParametersFileName) {
+    public Pairing initPairingParameter(final Integer lambda, String pairingParametersFileName) {
         //Global Setup
 //        int lambda = 512;
 //        动态产生的方法非常简单，大概有如下步骤：指定椭圆曲线的种类、产生椭圆曲线参数、初始化Pairing。
@@ -39,17 +38,15 @@ public class Bswabe {
             return PairingFactory.getPairing(typeAParams);
         }
     }
+
     /*
      * Generate a public key and corresponding master secret key.
      */
 
-    public static void setup(BswabePub pub, BswabeMsk msk) {
+    public void setup(BswabePub pub, BswabeMsk msk) {
         Element alpha, beta_inv;
-        String pairingParametersFileName = "a.properties";
-        Pairing pairing = InitPairingParameter(512, pairingParametersFileName);
 
-        pub.p = pairing;
-        pub.pairingParametersFileName = pairingParametersFileName;
+        Pairing pairing = initPairingParameter(512, pub.pairingParametersFileName);
         pub.g = pairing.getG1().newElement();
         pub.f = pairing.getG1().newElement();
         pub.h = pairing.getG1().newElement();
@@ -81,14 +78,14 @@ public class Bswabe {
     /*
      * Generate a private key with the given set of attributes.
      */
-    public static BswabePrv keygen(BswabePub pub, BswabeMsk msk, String[] attrs)
+    public BswabePrv keygen(BswabePub pub, BswabeMsk msk, String[] attrs)
             throws NoSuchAlgorithmException {
         BswabePrv prv = new BswabePrv();
         Element g_r, r, beta_inv;
         Pairing pairing;
 
         /* initialize */
-        pairing = pub.p;
+        pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
         prv.d = pairing.getG2().newElement();
         g_r = pairing.getG2().newElement();
         r = pairing.getZr().newElement();
@@ -138,7 +135,7 @@ public class Bswabe {
     /*
      * Delegate a subset of attribute of an existing private key.
      */
-    public static BswabePrv delegate(BswabePub pub, BswabePrv prv_src, String[] attrs_subset)
+    public BswabePrv delegate(BswabePub pub, BswabePrv prv_src, String[] attrs_subset)
             throws NoSuchAlgorithmException, IllegalArgumentException {
 
         BswabePrv prv = new BswabePrv();
@@ -146,7 +143,8 @@ public class Bswabe {
         Pairing pairing;
 
         /* initialize */
-        pairing = pub.p;
+
+        pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
         prv.d = pairing.getG2().newElement();
 
         g_rt = pairing.getG2().newElement();
@@ -237,7 +235,7 @@ public class Bswabe {
      * Returns null if an error occured, in which case a description can be
      * retrieved by calling bswabe_error().
      */
-    public static BswabeCphKey enc(BswabePub pub, String policy)
+    public BswabeCphKey enc(BswabePub pub, String policy)
             throws Exception {
         BswabeCphKey keyCph = new BswabeCphKey();
         BswabeCph cph = new BswabeCph();
@@ -245,7 +243,7 @@ public class Bswabe {
 
         /* initialize */
 
-        Pairing pairing = pub.p;
+        Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
         s = pairing.getZr().newElement();
         m = pairing.getGT().newElement();
         cph.cs = pairing.getGT().newElement();
@@ -277,8 +275,8 @@ public class Bswabe {
      * Returns true if decryption succeeded, false if this key does not satisfy
      * the policy of the ciphertext (in which case m is unaltered).
      */
-    public static BswabeElementBoolean dec(BswabePub pub, BswabePrv prv,
-                                           BswabeCph cph) {
+    public BswabeElementBoolean dec(BswabePub pub, BswabePrv prv,
+                                    BswabeCph cph) {
 
         BswabeElementBoolean beb = new BswabeElementBoolean();
 
@@ -292,16 +290,16 @@ public class Bswabe {
         }
 
         pickSatisfyMinLeaves(cph.p, prv);
-
-        Element fx = pub.p.getGT().newOneElement();
-        Element lx = pub.p.getZr().newOneElement();
+        Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
+        Element fx = pairing.getGT().newOneElement();
+        Element lx = pairing.getZr().newOneElement();
         decNodeFlatten(fx, lx, cph.p, prv, pub);
 
         // 这时的t = A
         Element m = cph.cs.duplicate();
         m.mul(fx); /* num_muls++; */
 
-        fx = pub.p.pairing(cph.c, prv.d);
+        fx = pairing.pairing(cph.c, prv.d);
         fx.invert();
         m.mul(fx); /* num_muls++; */
 
@@ -311,8 +309,8 @@ public class Bswabe {
         return beb;
     }
 
-    private static void decNodeFlatten(Element fx, Element lx, BswabePolicy p,
-                                       BswabePrv prv, BswabePub pub) {
+    private void decNodeFlatten(Element fx, Element lx, BswabePolicy p,
+                                BswabePrv prv, BswabePub pub) {
         if (p.children == null || p.children.length == 0) {
             decLeafFlatten(fx, lx, p, prv, pub);
         } else {
@@ -320,15 +318,15 @@ public class Bswabe {
         }
     }
 
-    private static void decLeafFlatten(Element fx, Element lx, BswabePolicy p,
-                                       BswabePrv prv, BswabePub pub) {
+    private void decLeafFlatten(Element fx, Element lx, BswabePolicy p,
+                                BswabePrv prv, BswabePub pub) {
         BswabePrvComp c;
         Element s, t;
 
         c = prv.comps.get(p.attri);
-
-        s = pub.p.pairing(p.c, c.d); /* num_pairings++; */
-        t = pub.p.pairing(p.cp, c.dp); /* num_pairings++; */
+        Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
+        s = pairing.pairing(p.c, c.d); /* num_pairings++; */
+        t = pairing.pairing(p.cp, c.dp); /* num_pairings++; */
         t.invert();
         s.mul(t); /* num_muls++; */
 
@@ -337,12 +335,12 @@ public class Bswabe {
         fx.mul(s); /* num_muls++; */
     }
 
-    private static void decInternalFlatten(Element fx, Element lx,
-                                           BswabePolicy p, BswabePrv prv, BswabePub pub) {
+    private void decInternalFlatten(Element fx, Element lx,
+                                    BswabePolicy p, BswabePrv prv, BswabePub pub) {
         int i;
         Element t, lxCopy;
-
-        t = pub.p.getZr().newOneElement();
+        Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
+        t = pairing.getZr().newOneElement();
 
         for (i = 0; i < p.satl.size(); i++) {
             lagrangeCoef(t, p.satl, p.satl.get(i));
@@ -356,7 +354,7 @@ public class Bswabe {
     /**
      * 这里求的是，拉格朗日插值公式的基函数的值
      */
-    private static void lagrangeCoef(Element _t, ArrayList<Integer> s, int i) {
+    private void lagrangeCoef(Element _t, ArrayList<Integer> s, int i) {
         Element t;
 
         t = _t.duplicate();
@@ -373,7 +371,7 @@ public class Bswabe {
         }
     }
 
-    private static void pickSatisfyMinLeaves(BswabePolicy p, BswabePrv prv) {
+    private void pickSatisfyMinLeaves(BswabePolicy p, BswabePrv prv) {
         int i, k, l, c_i;
         int len;
         ArrayList<Integer> c = new ArrayList<Integer>();
@@ -410,7 +408,7 @@ public class Bswabe {
         }
     }
 
-    private static void checkSatisfy(BswabePolicy p, BswabePrv prv) {
+    private void checkSatisfy(BswabePolicy p, BswabePrv prv) {
         int i, l;
         String prvAttr;
 
@@ -445,11 +443,11 @@ public class Bswabe {
         }
     }
 
-    private static void fillPolicy(BswabePolicy p, BswabePub pub, Element s)
+    private void fillPolicy(BswabePolicy p, BswabePub pub, Element s)
             throws NoSuchAlgorithmException {
         int i;
         Element r, t, h;
-        Pairing pairing = pub.p;
+        Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
         r = pairing.getZr().newElement();
         t = pairing.getZr().newElement();
         h = pairing.getG2().newElement();
@@ -477,7 +475,7 @@ public class Bswabe {
     }
 
     // Element r, BswabePolynomial q, Element x
-    private static void evalPoly(Element _t, BswabePolynomial q, Element r) {
+    private void evalPoly(Element _t, BswabePolynomial q, Element r) {
         int i;
         Element s, t;
 
@@ -499,7 +497,7 @@ public class Bswabe {
 
     }
 
-    private static BswabePolynomial randPoly(int deg, Element s) {
+    private BswabePolynomial randPoly(int deg, Element s) {
         int i;
         BswabePolynomial q = new BswabePolynomial();
         q.deg = deg;
@@ -518,7 +516,7 @@ public class Bswabe {
         return q;
     }
 
-    private static BswabePolicy parsePolicyPostfix(String s) {
+    private BswabePolicy parsePolicyPostfix(String s) {
         String[] toks;
         String tok;
         ArrayList<BswabePolicy> stack = new ArrayList<BswabePolicy>();
@@ -585,7 +583,7 @@ public class Bswabe {
         return root;
     }
 
-    private static BswabePolicy baseNode(int k, String s) {
+    private BswabePolicy baseNode(int k, String s) {
         BswabePolicy p = new BswabePolicy();
 
         p.k = k;
@@ -599,14 +597,14 @@ public class Bswabe {
         return p;
     }
 
-    private static void elementFromString(Element h, String s)
+    private void elementFromString(Element h, String s)
             throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-1");
         byte[] digest = md.digest(s.getBytes());
         h.setFromHash(digest, 0, digest.length);
     }
 
-    private static class IntegerComparator implements Comparator<Integer> {
+    private class IntegerComparator implements Comparator<Integer> {
         BswabePolicy policy;
 
         public IntegerComparator(BswabePolicy p) {
