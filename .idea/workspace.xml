@@ -81,17 +81,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/org/demo/cpabe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\外快\李博伦\cpabe_timelock" />
       <recent name="D:\外快\李博伦\cpabe_timelock\src\main\java\org\demo\cpabe" />
       <recent name="D:\外快\李博伦\cpabe_timelock\src\main\java\org\demo\sm" />
       <recent name="D:\外快\李博伦\cpabe_timelock\src\test\java\org\demo" />
       <recent name="D:\外快\李博伦\CPABE_TimeLock\keystore\cpabe" />
-      <recent name="D:\外快\李博伦\CPABE_TimeLock\lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -310,7 +310,7 @@
       <workItem from="1664020882742" duration="19000" />
       <workItem from="1664021293087" duration="33190000" />
       <workItem from="1664093613510" duration="2334000" />
-      <workItem from="1664116987183" duration="447000" />
+      <workItem from="1664116987183" duration="2585000" />
     </task>
     <servers />
   </component>

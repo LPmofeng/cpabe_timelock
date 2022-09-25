@@ -1,6 +1,5 @@
 package org.demo.contract;
 
-import com.alibaba.fastjson.JSON;
 import com.owlike.genson.Genson;
 import edu.princeton.cs.algs4.Out;
 import it.unisa.dia.gas.jpbc.Element;
@@ -32,10 +31,6 @@ public class Bswabe implements ContractInterface {
 
     private final Genson genson = new Genson();
 
-    private enum AssetTransferErrors {
-        ASSET_NOT_FOUND,
-        ASSET_ALREADY_EXISTS
-    }
     /**
      * 初始化配对参数
      */
@@ -96,12 +91,15 @@ public class Bswabe implements ContractInterface {
 
         /* store BswabePub into mskfile */
         pub_byte = SerializeUtils.serializeBswabePub(pub);
-        String pub_json = JSON.toJSONString(pub_byte);
+        String pub_json = genson.serialize(pub_byte);
+        // String pub_json = JSON.toJSONString(pub_byte);
         stub.putStringState("pub", pub_json);
 
         /* store BswabeMsk into mskfile */
         msk_byte = SerializeUtils.serializeBswabeMsk(msk);
-        String msk_json = JSON.toJSONString(msk_byte);
+        // String msk_json = JSON.toJSONString(msk_byte);
+        String msk_json = genson.serialize(msk_byte);
+
         stub.putStringState("msk", msk_json);
 
         return new Keys(pub_json, msk_json);
@@ -111,7 +109,8 @@ public class Bswabe implements ContractInterface {
     public byte[] readPub(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
         String pub_json = stub.getStringState("pub");
-        byte[] pub_byte = JSON.parseObject(pub_json, byte[].class);
+        byte[] pub_byte = genson.deserialize(pub_json, byte[].class);
+        // byte[] pub_byte = JSON.parseObject(pub_json, byte[].class);
         return pub_byte;
         // return SerializeUtils.unserializeBswabePub(pub_byte);
     }
@@ -120,7 +119,8 @@ public class Bswabe implements ContractInterface {
     public byte[] readMsk(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
         String msk_json = stub.getStringState("msk");
-        byte[] msk_byte = JSON.parseObject(msk_json, byte[].class);
+        byte[] msk_byte = genson.deserialize(msk_json, byte[].class);
+        // byte[] msk_byte = JSON.parseObject(msk_json, byte[].class);
         return msk_byte;
         // return SerializeUtils.unserializeBswabeMsk(SerializeUtils.unserializeBswabePub(pub_byte), msk_byte);
     }
@@ -182,7 +182,8 @@ public class Bswabe implements ContractInterface {
             prv.comps.add(comp);
         }
         byte[] prv_byte = SerializeUtils.serializeBswabePrv(prv);
-        String prv_json = JSON.toJSONString(prv_byte);
+        String prv_json = genson.serialize(prv_byte);
+        // String prv_json = JSON.toJSONString(prv_byte);
         stub.putStringState("prv", prv_json);
         return prv_json;
     }
@@ -191,7 +192,8 @@ public class Bswabe implements ContractInterface {
     public byte[] readPrv(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
         String prv_json = stub.getStringState("prv");
-        byte[] prv_byte = JSON.parseObject(prv_json, byte[].class);
+        byte[] prv_byte = genson.deserialize(prv_json, byte[].class);
+        // byte[] prv_byte = JSON.parseObject(prv_json, byte[].class);
         // return SerializeUtils.unserializeBswabePrv(readPub(ctx), prv_byte);
         return prv_byte;
     }
@@ -255,12 +257,14 @@ public class Bswabe implements ContractInterface {
         byte[] aesBuf;
         byte[] plt;
         cphBuf = SerializeUtils.bswabeCphSerialize(cph);
-        String cph_json = JSON.toJSONString(cphBuf);
+        String cph_json = genson.serialize(cphBuf);
+        // String cph_json = JSON.toJSONString(cphBuf);
         stub.putStringState("cph", cph_json);
         /* read file to encrypted */
         plt = message.getBytes(StandardCharsets.UTF_8);
         aesBuf = AESCoder.encrypt(m.toBytes(), plt);
-        String aes_json = JSON.toJSONString(aesBuf);
+        String aes_json = genson.serialize(aesBuf);
+        // String aes_json = JSON.toJSONString(aesBuf);
         stub.putStringState("aes", aes_json);
         return new CT(cph_json, aes_json);
     }
@@ -269,7 +273,8 @@ public class Bswabe implements ContractInterface {
     public byte[] readCph(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
         String cph_json = stub.getStringState("cph");
-        byte[] cph_byte = JSON.parseObject(cph_json, byte[].class);
+        byte[] cph_byte = genson.deserialize(cph_json, byte[].class);
+        // byte[] cph_byte = JSON.parseObject(cph_json, byte[].class);
         return cph_byte;
         // return SerializeUtils.bswabeCphUnserialize(readPub(ctx), cph_byte);
     }
@@ -278,7 +283,8 @@ public class Bswabe implements ContractInterface {
     public byte[] readAes(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
         String aes_json = stub.getStringState("aes");
-        return JSON.parseObject(aes_json, byte[].class);
+        return genson.deserialize(aes_json, byte[].class);
+        // return JSON.parseObject(aes_json, byte[].class);
     }
 
     /*

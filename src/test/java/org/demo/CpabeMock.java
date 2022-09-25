@@ -1,6 +1,5 @@
 package org.demo;
 
-import com.alibaba.fastjson.JSON;
 import com.owlike.genson.Genson;
 import org.demo.contract.Bswabe;
 import org.demo.cpabe.AESCoder;
@@ -33,7 +32,7 @@ public class CpabeMock {
         when(stub.getStringState("cph")).thenReturn(ct.cph_json);
         when(stub.getStringState("aes")).thenReturn(ct.aes_json);
         byte[] dec = contract.dec(ctx);
-        byte[] decrypt = AESCoder.decrypt(dec, JSON.parseObject(ct.aes_json, byte[].class));
+        byte[] decrypt = AESCoder.decrypt(dec, genson.deserialize(ct.aes_json, byte[].class));
         System.out.println("dec msg:" + new String(decrypt));
     }
 

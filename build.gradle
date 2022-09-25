@@ -7,7 +7,7 @@ plugins {
     id 'application'
 }
 
-group 'org.bmtac'
+group 'org.demo'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -46,7 +46,7 @@ dependencies {
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
     implementation 'org.json:json:+'
     implementation 'com.owlike:genson:1.5'
-    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.75'
+
     testImplementation 'org.assertj:assertj-core:3.11.1'
     testImplementation 'org.mockito:mockito-core:2.28.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
