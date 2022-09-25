@@ -22,7 +22,7 @@ public class CpabeMock {
         when(stub.getStringState("pub")).thenReturn(keys.puk_json);
         when(stub.getStringState("msk")).thenReturn(keys.msk_json);
         String attr = "baf,fim,foo";
-        String policy = "foo bar fim 2of3 baf 1of2";
+        String policy = "foo,bar,fim,2of3,baf,1of2";
         String url = "https://www.baidu.com";
         String prv_json = contract.keygen(ctx, attr);
         when(stub.getStringState("prv")).thenReturn(prv_json);

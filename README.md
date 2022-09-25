@@ -60,7 +60,7 @@ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.exa
 
 sh invoke.sh '{"function":"setup","Args":[]}'
 sh invoke.sh '{"function":"keygen","Args":["baf,fim,foo"]}'
-sh invoke.sh '{"function":"enc","Args":["foo bar fim 2of3 baf 1of2","www.baidu.com"]}'
+sh invoke.sh '{"function":"enc","Args":["foo bar fim 2of3 baf 1of2","www_baidu_com"]}'
 sh invoke.sh '{"function":"dec","Args":[]}'
 
 # 查询GP

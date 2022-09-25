@@ -442,7 +442,7 @@ public class Bswabe {
         ArrayList<BswabePolicy> stack = new ArrayList<BswabePolicy>();
         BswabePolicy root;
 
-        toks = s.split(" ");
+        toks = s.split(",");
 
         int toks_cnt = toks.length;
         for (int index = 0; index < toks_cnt; index++) {
