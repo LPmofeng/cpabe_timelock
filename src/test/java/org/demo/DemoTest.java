@@ -1,7 +1,7 @@
 package org.demo;
 
 
-import org.demo.cpabe.Cpabe;
+import org.demo.contract.Bswabe;
 import org.demo.sm.SM2EncDecUtils;
 import org.demo.sm.Util;
 import org.hyperledger.fabric.contract.Context;
@@ -42,27 +42,27 @@ public class DemoTest {
     @Test
     public void demoTest() throws Exception {
         Date t1 = new Date();
-        Cpabe test = new Cpabe();
+        Bswabe test = new Bswabe();
         Context ctx = mock(Context.class);
         ChaincodeStub stub = mock(ChaincodeStub.class);
         when(ctx.getStub()).thenReturn(stub);
 
         println("//start to setup");
-        test.setup(pubfile, mskfile);
+        // test.setup(pubfile, mskfile);
         println("//end to setup");
 
         println("//start to keygen");
-        test.keygen(pubfile, prvfile, mskfile, attr);
+        // test.keygen(pubfile, prvfile, mskfile, attr);
         println("//end to keygen");
 
         println("//start to enc");
-        test.enc(pubfile, policy, inputfile, encfile);
+        // test.enc(pubfile, policy, inputfile, encfile);
         println("//end to enc");
 
         println("//start to dec");
-        boolean flag = test.dec(pubfile, prvfile, encfile, decfile);
+        // boolean flag = test.dec(pubfile, prvfile, encfile, decfile);
         println("//end to dec");
-
+        boolean flag = false;
         if (flag) {
             //输入明文
             String plainText = "1421345jhag";

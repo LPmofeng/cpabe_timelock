@@ -8,26 +8,26 @@ public class BswabePolicy {
 	/* serialized */
 	
 	/* k=1 if leaf, otherwise threshould */
-	int k;
+	public int k;
 	/* attribute string if leaf, otherwise null */
-	String attr;
+	public String attr;
 	/**
 	 * 表示Cy
 	 */
-	Element c;			/* G_1 only for leaves */
+	public Element c;			/* G_1 only for leaves */
 	/**
 	 * 表示_Cy
  	 */
-	Element cp;		/* G_1 only for leaves */
+	public Element cp;		/* G_1 only for leaves */
 	/* array of BswabePolicy and length is 0 for leaves */
-	BswabePolicy[] children;
+	public BswabePolicy[] children;
 	
 	/* only used during encryption */
-	BswabePolynomial q;
+	public BswabePolynomial q;
 
 	/* only used during decription */
-	boolean satisfiable;
-	int min_leaves;
-	int attri;
-	ArrayList<Integer> satl = new ArrayList<Integer>();
+	public boolean satisfiable;
+	public int min_leaves;
+	public int attri;
+	public ArrayList<Integer> satl = new ArrayList<Integer>();
 }

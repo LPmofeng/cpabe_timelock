@@ -130,7 +130,7 @@
       <module name="demo.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.demo.cpabe.*" />
+          <option name="PATTERN" value="org.demo.contract.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -328,7 +328,7 @@
       <workItem from="1663850755000" duration="9000" />
       <workItem from="1663850862328" duration="629000" />
       <workItem from="1664020882742" duration="19000" />
-      <workItem from="1664021293087" duration="26768000" />
+      <workItem from="1664021293087" duration="30481000" />
     </task>
     <servers />
   </component>

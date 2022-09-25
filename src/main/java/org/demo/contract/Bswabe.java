@@ -1,20 +1,33 @@
-package org.demo.cpabe;
+package org.demo.contract;
 
+import com.alibaba.fastjson.JSON;
 import edu.princeton.cs.algs4.Out;
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.jpbc.PairingParameters;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
 import it.unisa.dia.gas.plaf.jpbc.pairing.a.TypeACurveGenerator;
+import org.demo.cpabe.*;
+import org.demo.pojo.CT;
+import org.demo.pojo.Keys;
+import org.hyperledger.fabric.contract.Context;
+import org.hyperledger.fabric.contract.ContractInterface;
+import org.hyperledger.fabric.contract.annotation.Contract;
+import org.hyperledger.fabric.contract.annotation.Default;
+import org.hyperledger.fabric.contract.annotation.Transaction;
+import org.hyperledger.fabric.shim.ChaincodeStub;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Bswabe {
+@Contract(name = "demo")
+@Default
+public class Bswabe implements ContractInterface {
     /**
      * 初始化配对参数
      *
@@ -42,10 +55,14 @@ public class Bswabe {
     /*
      * Generate a public key and corresponding master secret key.
      */
+    @Transaction(intent = Transaction.TYPE.SUBMIT)
+    public Keys setup(final Context ctx) {
+        ChaincodeStub stub = ctx.getStub();
+        byte[] pub_byte, msk_byte;
+        BswabePub pub = new BswabePub();
+        BswabeMsk msk = new BswabeMsk();
 
-    public void setup(BswabePub pub, BswabeMsk msk) {
         Element alpha, beta_inv;
-
         Pairing pairing = initPairingParameter(512, pub.pairingParametersFileName);
         pub.g = pairing.getG1().newElement();
         pub.f = pairing.getG1().newElement();
@@ -73,12 +90,46 @@ public class Bswabe {
         pub.h.powZn(msk.beta);
 
         pub.g_hat_alpha = pairing.pairing(pub.g, msk.g_alpha);
+
+        /* store BswabePub into mskfile */
+        pub_byte = SerializeUtils.serializeBswabePub(pub);
+        String pub_json = JSON.toJSONString(pub_byte);
+        stub.putStringState("pub", pub_json);
+
+        /* store BswabeMsk into mskfile */
+        msk_byte = SerializeUtils.serializeBswabeMsk(msk);
+        String msk_json = JSON.toJSONString(msk_byte);
+        stub.putStringState("msk", msk_json);
+
+        return new Keys(pub_json, msk_json);
+    }
+
+    @Transaction(intent = Transaction.TYPE.EVALUATE)
+    public byte[] readPub(final Context ctx) {
+        ChaincodeStub stub = ctx.getStub();
+        String pub_json = stub.getStringState("pub");
+        byte[] pub_byte = JSON.parseObject(pub_json, byte[].class);
+        return pub_byte;
+        // return SerializeUtils.unserializeBswabePub(pub_byte);
+    }
+
+    @Transaction(intent = Transaction.TYPE.EVALUATE)
+    public byte[] readMsk(final Context ctx) {
+        ChaincodeStub stub = ctx.getStub();
+        String msk_json = stub.getStringState("msk");
+        byte[] msk_byte = JSON.parseObject(msk_json, byte[].class);
+        return msk_byte;
+        // return SerializeUtils.unserializeBswabeMsk(SerializeUtils.unserializeBswabePub(pub_byte), msk_byte);
     }
 
     /*
      * Generate a private key with the given set of attributes.
      */
-    public BswabePrv keygen(BswabePub pub, BswabeMsk msk, String[] attrs) throws NoSuchAlgorithmException {
+    @Transaction(intent = Transaction.TYPE.SUBMIT)
+    public String keygen(final Context ctx, String attr_str) throws NoSuchAlgorithmException {
+        ChaincodeStub stub = ctx.getStub();
+        BswabePub pub = SerializeUtils.unserializeBswabePub(readPub(ctx));
+        BswabeMsk msk = SerializeUtils.unserializeBswabeMsk(pub, readMsk(ctx));
         BswabePrv prv = new BswabePrv();
         Element g_r, r, beta_inv;
         Pairing pairing;
@@ -100,7 +151,7 @@ public class Bswabe {
         beta_inv = msk.beta.duplicate();
         beta_inv.invert();
         prv.d.powZn(beta_inv);
-
+        String[] attrs = attr_str.split(",");
         int i, len = attrs.length;
         prv.comps = new ArrayList<>();
         for (i = 0; i < len; i++) {
@@ -127,8 +178,19 @@ public class Bswabe {
 
             prv.comps.add(comp);
         }
+        byte[] prv_byte = SerializeUtils.serializeBswabePrv(prv);
+        String prv_json = JSON.toJSONString(prv_byte);
+        stub.putStringState("prv", prv_json);
+        return prv_json;
+    }
 
-        return prv;
+    @Transaction(intent = Transaction.TYPE.EVALUATE)
+    public byte[] readPrv(final Context ctx) {
+        ChaincodeStub stub = ctx.getStub();
+        String prv_json = stub.getStringState("prv");
+        byte[] prv_byte = JSON.parseObject(prv_json, byte[].class);
+        // return SerializeUtils.unserializeBswabePrv(readPub(ctx), prv_byte);
+        return prv_byte;
     }
 
     /*
@@ -155,14 +217,15 @@ public class Bswabe {
      * Returns null if an error occured, in which case a description can be
      * retrieved by calling bswabe_error().
      */
-    public BswabeCphKey enc(BswabePub pub, String policy)
-            throws Exception {
+    @Transaction(intent = Transaction.TYPE.SUBMIT)
+    public CT enc(final Context ctx, String policy, String message) throws Exception {
+        ChaincodeStub stub = ctx.getStub();
+        BswabePub pub = SerializeUtils.unserializeBswabePub(readPub(ctx));
         BswabeCphKey keyCph = new BswabeCphKey();
         BswabeCph cph = new BswabeCph();
         Element s, m;
 
         /* initialize */
-
         Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
         s = pairing.getZr().newElement();
         m = pairing.getGT().newElement();
@@ -185,9 +248,34 @@ public class Bswabe {
         keyCph.cph = cph;
         keyCph.key = m;
 
-        return keyCph;
+        byte[] cphBuf;
+        byte[] aesBuf;
+        byte[] plt;
+        cphBuf = SerializeUtils.bswabeCphSerialize(cph);
+        String cph_json = JSON.toJSONString(cphBuf);
+        stub.putStringState("cph", cph_json);
+        /* read file to encrypted */
+        plt = message.getBytes(StandardCharsets.UTF_8);
+        aesBuf = AESCoder.encrypt(m.toBytes(), plt);
+        String aes_json = JSON.toJSONString(aesBuf);
+        stub.putStringState("aes", aes_json);
+        return new CT(cph_json, aes_json);
+    }
+    @Transaction(intent = Transaction.TYPE.EVALUATE)
+    public byte[] readCph(final Context ctx) {
+        ChaincodeStub stub = ctx.getStub();
+        String cph_json = stub.getStringState("cph");
+        byte[] cph_byte = JSON.parseObject(cph_json, byte[].class);
+        return cph_byte;
+        // return SerializeUtils.bswabeCphUnserialize(readPub(ctx), cph_byte);
     }
 
+    @Transaction(intent = Transaction.TYPE.EVALUATE)
+    public byte[] readAes(final Context ctx) {
+        ChaincodeStub stub = ctx.getStub();
+        String aes_json = stub.getStringState("aes");
+        return JSON.parseObject(aes_json, byte[].class);
+    }
     /*
      * Decrypt the specified ciphertext using the given private key, filling in
      * the provided element m (which need not be initialized) with the result.
@@ -195,8 +283,12 @@ public class Bswabe {
      * Returns true if decryption succeeded, false if this key does not satisfy
      * the policy of the ciphertext (in which case m is unaltered).
      */
-    public BswabeElementBoolean dec(BswabePub pub, BswabePrv prv,
-                                    BswabeCph cph) {
+    @Transaction(intent = Transaction.TYPE.SUBMIT)
+    public byte[] dec(final Context ctx) {
+        ChaincodeStub stub = ctx.getStub();
+        BswabePub pub = SerializeUtils.unserializeBswabePub(readPub(ctx));
+        BswabePrv prv = SerializeUtils.unserializeBswabePrv(pub, readPrv(ctx));
+        BswabeCph cph = SerializeUtils.bswabeCphUnserialize(pub, readCph(ctx));
 
         BswabeElementBoolean beb = new BswabeElementBoolean();
 
@@ -206,7 +298,7 @@ public class Bswabe {
                     .println("cannot decrypt, attributes in key do not satisfy policy");
             beb.e = null;
             beb.b = false;
-            return beb;
+            return null;
         }
 
         pickSatisfyMinLeaves(cph.p, prv);
@@ -226,7 +318,7 @@ public class Bswabe {
         beb.e = m;
         beb.b = true;
 
-        return beb;
+        return m.toBytes();
     }
 
     private void decNodeFlatten(Element fx, Element lx, BswabePolicy p,

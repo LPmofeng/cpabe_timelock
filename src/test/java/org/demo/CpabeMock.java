@@ -1,6 +1,8 @@
 package org.demo;
 
-import org.demo.contract.Cpabe;
+import com.alibaba.fastjson.JSON;
+import org.demo.contract.Bswabe;
+import org.demo.cpabe.AESCoder;
 import org.demo.pojo.CT;
 import org.demo.pojo.Keys;
 import org.hyperledger.fabric.contract.Context;
@@ -14,7 +16,7 @@ public class CpabeMock {
 
     @Test
     public void cpabeDemoTest() throws Exception {
-        Cpabe contract = new Cpabe();
+        Bswabe contract = new Bswabe();
         Context ctx = mock(Context.class);
         ChaincodeStub stub = mock(ChaincodeStub.class);
         when(ctx.getStub()).thenReturn(stub);
@@ -29,8 +31,9 @@ public class CpabeMock {
         CT ct = contract.enc(ctx, policy, url);
         when(stub.getStringState("cph")).thenReturn(ct.cph_json);
         when(stub.getStringState("aes")).thenReturn(ct.aes_json);
-        boolean dec = contract.dec(ctx);
-        System.out.println(dec);
+        byte[] dec = contract.dec(ctx);
+        byte[] decrypt = AESCoder.decrypt(dec, JSON.parseObject(ct.aes_json, byte[].class));
+        System.out.println("dec msg:" + new String(decrypt));
     }
 
 }
