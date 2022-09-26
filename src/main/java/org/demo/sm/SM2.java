@@ -41,6 +41,8 @@ public class SM2 {
     public final ECFieldElement ecc_gx_fieldelement;
     public final ECFieldElement ecc_gy_fieldelement;
 
+
+
     public SM2() {
         this.ecc_p = new BigInteger(ecc_param[0], 16);
         this.ecc_a = new BigInteger(ecc_param[1], 16);
@@ -62,5 +64,74 @@ public class SM2 {
 
         this.ecc_key_pair_generator = new ECKeyPairGenerator();
         this.ecc_key_pair_generator.init(ecc_ecgenparam);
+    }
+    public static String[] getEcc_param() {
+        return ecc_param;
+    }
+
+    public BigInteger getEcc_p() {
+        return ecc_p;
+    }
+
+    public BigInteger getEcc_a() {
+        return ecc_a;
+    }
+
+    public BigInteger getEcc_b() {
+        return ecc_b;
+    }
+
+    public BigInteger getEcc_n() {
+        return ecc_n;
+    }
+
+    public BigInteger getEcc_gx() {
+        return ecc_gx;
+    }
+
+    public BigInteger getEcc_gy() {
+        return ecc_gy;
+    }
+
+    public ECCurve getEcc_curve() {
+        return ecc_curve;
+    }
+
+    public ECPoint getEcc_point_g() {
+        return ecc_point_g;
+    }
+
+    public ECDomainParameters getEcc_bc_spec() {
+        return ecc_bc_spec;
+    }
+
+    public ECKeyPairGenerator getEcc_key_pair_generator() {
+        return ecc_key_pair_generator;
+    }
+
+    public ECFieldElement getEcc_gx_fieldelement() {
+        return ecc_gx_fieldelement;
+    }
+
+    public ECFieldElement getEcc_gy_fieldelement() {
+        return ecc_gy_fieldelement;
+    }
+
+    @Override
+    public String toString() {
+        return "SM2{" +
+                "ecc_p=" + ecc_p +
+                ", ecc_a=" + ecc_a +
+                ", ecc_b=" + ecc_b +
+                ", ecc_n=" + ecc_n +
+                ", ecc_gx=" + ecc_gx +
+                ", ecc_gy=" + ecc_gy +
+                ", ecc_curve=" + ecc_curve +
+                ", ecc_point_g=" + ecc_point_g +
+                ", ecc_bc_spec=" + ecc_bc_spec +
+                ", ecc_key_pair_generator=" + ecc_key_pair_generator +
+                ", ecc_gx_fieldelement=" + ecc_gx_fieldelement +
+                ", ecc_gy_fieldelement=" + ecc_gy_fieldelement +
+                '}';
     }
 }

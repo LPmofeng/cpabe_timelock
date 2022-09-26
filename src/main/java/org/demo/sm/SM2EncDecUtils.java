@@ -2,12 +2,11 @@ package org.demo.sm;
 
 import org.bouncycastle.math.ec.ECPoint;
 
-import java.io.IOException;
 import java.math.BigInteger;
 
 public class SM2EncDecUtils {
     //数据加密
-    public static String encrypt(byte[] publicKey, byte[] data) throws IOException {
+    public static String encrypt(byte[] publicKey, byte[] data) {
         if (publicKey == null || publicKey.length == 0) {
             return null;
         }
@@ -39,7 +38,7 @@ public class SM2EncDecUtils {
     }
 
     //数据解密
-    public static byte[] decrypt(byte[] privateKey, byte[] encryptedData) throws IOException {
+    public static byte[] decrypt(byte[] privateKey, byte[] encryptedData) {
         if (privateKey == null || privateKey.length == 0) {
             return null;
         }

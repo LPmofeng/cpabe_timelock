@@ -7,6 +7,7 @@ import org.bouncycastle.crypto.params.ECPublicKeyParameters;
 import org.bouncycastle.math.ec.ECPoint;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 public class Cipher {
     private int ct;
@@ -21,6 +22,30 @@ public class Cipher {
         this.ct = 1;
         this.key = new byte[32];
         this.keyOff = 0;
+    }
+
+    public int getCt() {
+        return ct;
+    }
+
+    public ECPoint getP2() {
+        return p2;
+    }
+
+    public SM3Digest getSm3keybase() {
+        return sm3keybase;
+    }
+
+    public SM3Digest getSm3c3() {
+        return sm3c3;
+    }
+
+    public byte[] getKey() {
+        return key;
+    }
+
+    public byte getKeyOff() {
+        return keyOff;
     }
 
     private void Reset()
@@ -101,5 +126,17 @@ public class Cipher {
         this.sm3c3.update(p, 0, p.length);
         this.sm3c3.doFinal(c3, 0);
         Reset();
+    }
+
+    @Override
+    public String toString() {
+        return "Cipher{" +
+                "ct=" + ct +
+                ", p2=" + p2 +
+                ", sm3keybase=" + sm3keybase +
+                ", sm3c3=" + sm3c3 +
+                ", key=" + Arrays.toString(key) +
+                ", keyOff=" + keyOff +
+                '}';
     }
 }
