@@ -4,7 +4,6 @@ import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
 
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
 public class SerializeUtils {
@@ -292,8 +291,8 @@ public class SerializeUtils {
 
 	private static void byteArrListAppend(ArrayList<Byte> arrlist, byte[] b) {
 		int len = b.length;
-		for (byte value : b) {
-			arrlist.add(value);
+		for (int i = 0; i < len; i++) {
+			arrlist.add(Byte.valueOf(b[i]));
 		}
 	}
 
@@ -302,7 +301,7 @@ public class SerializeUtils {
 		byte[] b = new byte[len];
 	
 		for (int i = 0; i < len; i++) {
-			b[i] = B.get(i);
+			b[i] = B.get(i).byteValue();
 		}
 	
 		return b;

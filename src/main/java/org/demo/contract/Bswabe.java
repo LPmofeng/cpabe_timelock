@@ -10,6 +10,8 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.a.TypeACurveGenerator;
 import org.demo.cpabe.*;
 import org.demo.pojo.CT;
 import org.demo.pojo.Keys;
+import org.demo.sm.SM2EncDecUtils;
+import org.demo.sm.Util;
 import org.hyperledger.fabric.contract.Context;
 import org.hyperledger.fabric.contract.ContractInterface;
 import org.hyperledger.fabric.contract.annotation.Contract;
@@ -18,22 +20,27 @@ import org.hyperledger.fabric.contract.annotation.Transaction;
 import org.hyperledger.fabric.shim.ChaincodeStub;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 @Contract(name = "demo")
 @Default
 public final class Bswabe implements ContractInterface {
 
     private final Genson genson = new Genson();
+
+
     private enum AssetTransferErrors {
         ASSET_NOT_FOUND,
         ASSET_ALREADY_EXISTS
     }
+
     /**
      * 初始化配对参数
      */
@@ -95,17 +102,21 @@ public final class Bswabe implements ContractInterface {
         /* store BswabePub into mskfile */
         pub_byte = SerializeUtils.serializeBswabePub(pub);
         String pub_json = genson.serialize(pub_byte);
-        // String pub_json = JSON.toJSONString(pub_byte);
+        // this is cpabe pub
         stub.putStringState("pub", pub_json);
 
         /* store BswabeMsk into mskfile */
         msk_byte = SerializeUtils.serializeBswabeMsk(msk);
-        // String msk_json = JSON.toJSONString(msk_byte);
+        // this is cpabe msk
         String msk_json = genson.serialize(msk_byte);
-
         stub.putStringState("msk", msk_json);
 
-        return new Keys(pub_json, msk_json);
+        // store sm key
+        String sm_pri = "0B1CE43098BC21B8E82B5C065EDB534CB86532B1900A49D49F3C53762D2997FA";
+        String sm_pub = "04BB34D657EE7E8490E66EF577E6B3CEA28B739511E787FB4F71B7F38F241D87F18A5A93DF74E90FF94F4EB907F271A36B295B851F971DA5418F4915E2C1A23D6E";
+        stub.putStringState("sm_pri", sm_pri);
+        stub.putStringState("sm_pub", sm_pub);
+        return new Keys(pub_json, msk_json,sm_pub,sm_pri);
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
@@ -128,12 +139,25 @@ public final class Bswabe implements ContractInterface {
         // return SerializeUtils.unserializeBswabeMsk(SerializeUtils.unserializeBswabePub(pub_byte), msk_byte);
     }
 
+    @Transaction(intent = Transaction.TYPE.EVALUATE)
+    public String readSMPub(final Context ctx) {
+        ChaincodeStub stub = ctx.getStub();
+        return stub.getStringState("sm_pub");
+    }
+
+    @Transaction(intent = Transaction.TYPE.EVALUATE)
+    public String readSMPri(final Context ctx) {
+        ChaincodeStub stub = ctx.getStub();
+        return stub.getStringState("sm_pri");
+    }
+
     /*
      * Generate a private key with the given set of attributes.
      */
     @Transaction(intent = Transaction.TYPE.SUBMIT)
     public String keygen(final Context ctx, String attr_str) throws NoSuchAlgorithmException {
         ChaincodeStub stub = ctx.getStub();
+        Date t1 = new Date();
         BswabePub pub = SerializeUtils.unserializeBswabePub(readPub(ctx));
         BswabeMsk msk = SerializeUtils.unserializeBswabeMsk(pub, readMsk(ctx));
         BswabePrv prv = new BswabePrv();
@@ -188,7 +212,9 @@ public final class Bswabe implements ContractInterface {
         String prv_json = genson.serialize(prv_byte);
         // String prv_json = JSON.toJSONString(prv_byte);
         stub.putStringState("prv", prv_json);
-        return prv_json;
+        Date t2 = new Date();
+        long user_key_gen_time = t2.getTime() - t1.getTime();
+        return "user key gen time = " + user_key_gen_time + " user key = " + prv_json;
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
@@ -196,8 +222,6 @@ public final class Bswabe implements ContractInterface {
         ChaincodeStub stub = ctx.getStub();
         String prv_json = stub.getStringState("prv");
         byte[] prv_byte = genson.deserialize(prv_json, byte[].class);
-        // byte[] prv_byte = JSON.parseObject(prv_json, byte[].class);
-        // return SerializeUtils.unserializeBswabePrv(readPub(ctx), prv_byte);
         return prv_byte;
     }
 
@@ -228,6 +252,7 @@ public final class Bswabe implements ContractInterface {
     @Transaction(intent = Transaction.TYPE.SUBMIT)
     public CT enc(final Context ctx, String policy, String message) throws Exception {
         ChaincodeStub stub = ctx.getStub();
+        Date t1 = new Date();
         BswabePub pub = SerializeUtils.unserializeBswabePub(readPub(ctx));
         BswabeCphKey keyCph = new BswabeCphKey();
         BswabeCph cph = new BswabeCph();
@@ -269,7 +294,10 @@ public final class Bswabe implements ContractInterface {
         String aes_json = genson.serialize(aesBuf);
         // String aes_json = JSON.toJSONString(aesBuf);
         stub.putStringState("aes", aes_json);
-        return new CT(cph_json, aes_json);
+        Date t2 = new Date();
+        long enc_time = t2.getTime() - t1.getTime();
+
+        return new CT(cph_json, aes_json, enc_time);
     }
 
     @Transaction(intent = Transaction.TYPE.EVALUATE)
@@ -298,8 +326,9 @@ public final class Bswabe implements ContractInterface {
      * the policy of the ciphertext (in which case m is unaltered).
      */
     @Transaction(intent = Transaction.TYPE.SUBMIT)
-    public byte[] dec(final Context ctx) {
+    public String dec(final Context ctx) throws Exception {
         ChaincodeStub stub = ctx.getStub();
+        Date t1 = new Date();
         BswabePub pub = SerializeUtils.unserializeBswabePub(readPub(ctx));
         BswabePrv prv = SerializeUtils.unserializeBswabePrv(pub, readPrv(ctx));
         BswabeCph cph = SerializeUtils.bswabeCphUnserialize(pub, readCph(ctx));
@@ -314,7 +343,6 @@ public final class Bswabe implements ContractInterface {
             beb.b = false;
             return null;
         }
-
         pickSatisfyMinLeaves(cph.p, prv);
         Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
         Element fx = pairing.getGT().newOneElement();
@@ -331,8 +359,64 @@ public final class Bswabe implements ContractInterface {
 
         beb.e = m;
         beb.b = true;
+        byte[] aes = readAes(ctx);
+        byte[] decrypt = AESCoder.decrypt(beb.e.toBytes(), aes);
+        // System.out.println("dec msg:" + new String(decrypt));
+        Date t2 = new Date();
+        long dec_time = t2.getTime() - t1.getTime();
+        return "dec msg = " + new String(decrypt) + ", dec time = " + dec_time;
+    }
 
-        return m.toBytes();
+    // vote  enc
+    @Transaction(intent = Transaction.TYPE.SUBMIT)
+    public String voteEnc(final Context ctx, String msg, int userNum) throws IOException {
+        ChaincodeStub stub = ctx.getStub();
+        Date t1 = new Date();
+        if (userNum < 1) {
+            return "error";
+        }
+        for (int i = 0; i < userNum; i++) {
+            String pubk = readSMPub(ctx);
+            byte[] sourceData = msg.getBytes();
+            String cipherText = SM2EncDecUtils.encrypt(Util.hexToByte(pubk), sourceData);
+            // To simplify the experiment, we only have one ballot box
+            // At the same time, we record the number of votes
+            String voteCount = stub.getStringState("voteCount");
+            int count = 0;
+            // When the number of votes is not empty, it means that the ballot box has already voted.
+            // When it is not empty, it means that someone has cast the first vote at this time.
+            if (voteCount != null && !voteCount.isEmpty()) {
+                count = Integer.parseInt(voteCount);
+            }
+            count++;
+            stub.putStringState("voteCount", String.valueOf(count));
+            stub.putStringState("vote_ct" + count, cipherText);
+        }
+        Date t2 = new Date();
+        long enc_time = t2.getTime() - t1.getTime();
+        return "vote enc time = " + enc_time;
+    }
+
+    @Transaction(intent = Transaction.TYPE.SUBMIT)
+    public String voteDec(final Context ctx) throws IOException {
+        ChaincodeStub stub = ctx.getStub();
+        Date t1 = new Date();
+        String prik = readSMPri(ctx);
+        String voteCount = stub.getStringState("voteCount");
+        int count;
+        if (voteCount != null && !voteCount.isEmpty()) {
+            count = Integer.parseInt(voteCount);
+        } else {
+            return "no vote";
+        }
+        for (int i = 1; i <= count; i++) {
+            String ct = stub.getStringState("vote_ct" + i);
+            // No need to pay attention to the decrypted content, just to get the time
+            SM2EncDecUtils.decrypt(Util.hexToByte(prik), Util.hexToByte(ct));
+        }
+        Date t2 = new Date();
+        long dec_time = t2.getTime() - t1.getTime();
+        return "show time: " + count + " votes, dec time =" + dec_time;
     }
 
     private void decNodeFlatten(Element fx, Element lx, BswabePolicy p, BswabePrv prv, BswabePub pub) {
@@ -343,8 +427,7 @@ public final class Bswabe implements ContractInterface {
         }
     }
 
-    private void decLeafFlatten(Element fx, Element lx, BswabePolicy p,
-                                BswabePrv prv, BswabePub pub) {
+    private void decLeafFlatten(Element fx, Element lx, BswabePolicy p, BswabePrv prv, BswabePub pub) {
         BswabePrvComp c;
         Element s, t;
 
@@ -360,8 +443,7 @@ public final class Bswabe implements ContractInterface {
         fx.mul(s); /* num_muls++; */
     }
 
-    private void decInternalFlatten(Element fx, Element lx,
-                                    BswabePolicy p, BswabePrv prv, BswabePub pub) {
+    private void decInternalFlatten(Element fx, Element lx, BswabePolicy p, BswabePrv prv, BswabePub pub) {
         int i;
         Element t, lxCopy;
         Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
@@ -468,8 +550,7 @@ public final class Bswabe implements ContractInterface {
         }
     }
 
-    private void fillPolicy(BswabePolicy p, BswabePub pub, Element s)
-            throws NoSuchAlgorithmException {
+    private void fillPolicy(BswabePolicy p, BswabePub pub, Element s) throws NoSuchAlgorithmException {
         int i;
         Element r, t, h;
         Pairing pairing = PairingFactory.getPairing(pub.pairingParametersFileName);
@@ -623,8 +704,7 @@ public final class Bswabe implements ContractInterface {
         return p;
     }
 
-    private void elementFromString(Element h, String s)
-            throws NoSuchAlgorithmException {
+    private void elementFromString(Element h, String s) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-1");
         byte[] digest = md.digest(s.getBytes());
         h.setFromHash(digest, 0, digest.length);

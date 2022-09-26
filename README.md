@@ -1,3 +1,4 @@
+**从第3步开始，如果fabric网络启动错误，先关闭望楼后执行第1，2步**
 **0. git**
 ```sh
 git add .
@@ -14,14 +15,13 @@ docker volume prune
 
 ```sh
 docker network prune
-
-docker rmi -f $(docker images -qa)
 ```
 
 **3. 进入fabric-samples/test-network，创建Fabric网络，并创建通道**
 
 ```sh
 cd /usr/local/dev/code/go/src/github.com/hyperledger/fabric-samples/test-network
+
 ./network.sh up createChannel -ca
 ```
 
@@ -29,8 +29,6 @@ cd /usr/local/dev/code/go/src/github.com/hyperledger/fabric-samples/test-network
 
 ```sh
 ./network.sh deployCC -ccn demo -ccp ../cpabe_timelock -ccl java -ccep "OR('Org1MSP.member','Org2MSP.member')"
-# 官方java智能合约测试
-./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-java -ccl java -ccep "OR('Org1MSP.member','Org2MSP.member')"
 ```
 
 **5.设置执行环境及配置文件路径**
@@ -58,6 +56,7 @@ export CORE_PEER_ADDRESS=localhost:7051
 ```sh
 peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile ${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt -c '{"function":"InitLedger","Args":[]}'
 
+# cpabe
 sh invoke.sh '{"function":"setup","Args":[]}'
 sh invoke.sh '{"function":"keygen","Args":["baf,fim,foo"]}'
 sh invoke.sh '{"function":"enc","Args":["foo,bar,fim,2of3,baf,1of2","www_baidu_com"]}'
