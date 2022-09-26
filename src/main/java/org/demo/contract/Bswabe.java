@@ -35,12 +35,6 @@ public final class Bswabe implements ContractInterface {
 
     private final Genson genson = new Genson();
 
-
-    private enum AssetTransferErrors {
-        ASSET_NOT_FOUND,
-        ASSET_ALREADY_EXISTS
-    }
-
     /**
      * 初始化配对参数
      */

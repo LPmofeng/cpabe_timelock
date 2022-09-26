@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9ef063f9-6018-407e-bb34-4133eecff2cf" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/demo/sm/SM2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/demo/sm/SM2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/demo/contract/Bswabe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/demo/contract/Bswabe.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,29 +141,6 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="DemoTest.demoTest (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;org.demo.DemoTest.demoTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="CpabeMock.cpabeDemoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="demo.test" />
       <extension name="coverage">
@@ -197,6 +173,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SM2Test.sm2Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.demo" />
+      <option name="MAIN_CLASS_NAME" value="org.demo.SM2Test" />
+      <option name="METHOD_NAME" value="sm2Test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="BMTAC.main" />
       <method v="2">
@@ -213,10 +205,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.CpabeMock.cpabeDemoTest" />
+        <item itemvalue="JUnit.SM2Test.sm2Test" />
         <item itemvalue="Gradle.CpabeMock.cpabeDemoTest" />
         <item itemvalue="JUnit.DemoTest.demoTest (1)" />
         <item itemvalue="Application.LangPolicy" />
-        <item itemvalue="Gradle.DemoTest.demoTest (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -313,7 +305,8 @@
       <workItem from="1664093613510" duration="2334000" />
       <workItem from="1664116987183" duration="7207000" />
       <workItem from="1664156530288" duration="11155000" />
-      <workItem from="1664167817113" duration="614000" />
+      <workItem from="1664167817113" duration="1900000" />
+      <workItem from="1664169963363" duration="911000" />
     </task>
     <servers />
   </component>
