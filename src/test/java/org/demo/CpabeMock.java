@@ -8,6 +8,7 @@ import org.demo.sm.SM2EncDecUtils;
 import org.demo.sm.Util;
 import org.hyperledger.fabric.contract.Context;
 import org.hyperledger.fabric.shim.ChaincodeStub;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
@@ -47,9 +48,13 @@ public class CpabeMock {
         System.out.println(voteEnc);
         when(stub.getStringState("voteCount")).thenReturn("1");
 
+
         when(stub.getStringState("vote_ct1")).thenReturn(SM2EncDecUtils.encrypt(Util.hexToByte(keys.sm_puk), "1".getBytes()));
         String s = contract.voteDec(ctx);
-        System.out.println(s);
+        JSONObject jsonObject = new JSONObject(s);
+        Object cts = jsonObject.get("cts");
+
+        System.out.println(cts);
     }
 
 }

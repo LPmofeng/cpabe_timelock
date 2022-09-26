@@ -18,16 +18,14 @@ import org.hyperledger.fabric.contract.annotation.Contract;
 import org.hyperledger.fabric.contract.annotation.Default;
 import org.hyperledger.fabric.contract.annotation.Transaction;
 import org.hyperledger.fabric.shim.ChaincodeStub;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
+import java.util.*;
 
 @Contract(name = "demo")
 @Default
@@ -394,8 +392,6 @@ public final class Bswabe implements ContractInterface {
     @Transaction(intent = Transaction.TYPE.SUBMIT)
     public String voteDec(final Context ctx) throws IOException {
         ChaincodeStub stub = ctx.getStub();
-        Date t1 = new Date();
-        String prik = readSMPri(ctx);
         String voteCount = stub.getStringState("voteCount");
         int count;
         if (voteCount != null && !voteCount.isEmpty()) {
@@ -403,14 +399,18 @@ public final class Bswabe implements ContractInterface {
         } else {
             return "no vote";
         }
+        List<String> cts = new ArrayList<>();
         for (int i = 1; i <= count; i++) {
             String ct = stub.getStringState("vote_ct" + i);
             // No need to pay attention to the decrypted content, just to get the time
-            SM2EncDecUtils.decrypt(Util.hexToByte(prik), Util.hexToByte(ct));
+            cts.add(ct);
+            // SM2EncDecUtils.decrypt(Util.hexToByte(prik), Util.hexToByte(ct));
         }
-        Date t2 = new Date();
-        long dec_time = t2.getTime() - t1.getTime();
-        return "show time: " + count + " votes, dec time =" + dec_time;
+        String ctsJson = genson.serialize(cts);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("count",count);
+        jsonObject.put("cts",ctsJson);
+        return jsonObject.toString();
     }
 
     private void decNodeFlatten(Element fx, Element lx, BswabePolicy p, BswabePrv prv, BswabePub pub) {
