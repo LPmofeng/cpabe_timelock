@@ -63,6 +63,9 @@ sh invoke.sh '{"function":"keygen","Args":["baf,fim,foo"]}'
 sh invoke.sh '{"function":"enc","Args":["foo,bar,fim,2of3,baf,1of2","www_baidu_com"]}'
 sh invoke.sh '{"function":"dec","Args":[]}'
 
+# sm
+sh invoke.sh '{"function":"voteEnc","Args":["A",1]}'
+sh invoke.sh '{"function":"voteDec","Args":[]}'
 ```
 **查看链码日志**
 
