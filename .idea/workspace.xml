@@ -7,9 +7,8 @@
     <list default="true" id="9ef063f9-6018-407e-bb34-4133eecff2cf" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/demo/sm/Cipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/demo/sm/Cipher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/demo/sm/SM2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/demo/sm/SM2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/demo/sm/SM2EncDecUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/demo/sm/SM2EncDecUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,7 +312,8 @@
       <workItem from="1664021293087" duration="33190000" />
       <workItem from="1664093613510" duration="2334000" />
       <workItem from="1664116987183" duration="7207000" />
-      <workItem from="1664156530288" duration="9604000" />
+      <workItem from="1664156530288" duration="11155000" />
+      <workItem from="1664167817113" duration="614000" />
     </task>
     <servers />
   </component>
