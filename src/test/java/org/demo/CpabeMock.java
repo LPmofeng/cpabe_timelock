@@ -44,13 +44,13 @@ public class CpabeMock {
         System.out.println("dec msg:" + dec);
 
 
-        String voteEnc = contract.voteEnc(ctx, "A", 1);
+        String voteEnc = contract.voteUpload(ctx, "A", 1);
         System.out.println(voteEnc);
         when(stub.getStringState("voteCount")).thenReturn("1");
 
 
         when(stub.getStringState("vote_ct1")).thenReturn(SM2EncDecUtils.encrypt(Util.hexToByte(keys.sm_puk), "1".getBytes()));
-        String s = contract.voteDec(ctx);
+        String s = contract.voteSelect(ctx);
         JSONObject jsonObject = new JSONObject(s);
         Object cts = jsonObject.get("cts");
 

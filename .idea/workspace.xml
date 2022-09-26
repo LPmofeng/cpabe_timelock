@@ -7,7 +7,6 @@
     <list default="true" id="9ef063f9-6018-407e-bb34-4133eecff2cf" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/demo/contract/Bswabe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/demo/contract/Bswabe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/demo/CpabeMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/demo/CpabeMock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,7 +305,10 @@
       <workItem from="1664116987183" duration="7207000" />
       <workItem from="1664156530288" duration="11155000" />
       <workItem from="1664167817113" duration="1900000" />
-      <workItem from="1664169963363" duration="4551000" />
+      <workItem from="1664169963363" duration="4947000" />
+      <workItem from="1664177637724" duration="387000" />
+      <workItem from="1664182320034" duration="5000" />
+      <workItem from="1664182723050" duration="2015000" />
     </task>
     <servers />
   </component>

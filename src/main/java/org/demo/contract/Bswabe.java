@@ -361,9 +361,8 @@ public final class Bswabe implements ContractInterface {
 
     // vote  enc
     @Transaction(intent = Transaction.TYPE.SUBMIT)
-    public String voteEnc(final Context ctx, String msg, int userNum) throws IOException {
+    public String voteUpload(final Context ctx, String msg, int userNum) {
         ChaincodeStub stub = ctx.getStub();
-        Date t1 = new Date();
         if (userNum < 1) {
             return "error";
         }
@@ -373,7 +372,7 @@ public final class Bswabe implements ContractInterface {
             // String cipherText = SM2EncDecUtils.encrypt(Util.hexToByte(pubk), sourceData);
             // To simplify the experiment, we only have one ballot box
             // At the same time, we record the number of votes
-            String voteCount = stub.getStringState("voteCount");
+            String voteCount = readVoteCount(ctx);
             int count = 0;
             // When the number of votes is not empty, it means that the ballot box has already voted.
             // When it is not empty, it means that someone has cast the first vote at this time.
@@ -384,15 +383,13 @@ public final class Bswabe implements ContractInterface {
             stub.putStringState("voteCount", String.valueOf(count));
             stub.putStringState("vote_ct" + count, msg);
         }
-        Date t2 = new Date();
-        long enc_time = t2.getTime() - t1.getTime();
-        return "vote enc time = " + enc_time;
+        return "vote success";
     }
 
     @Transaction(intent = Transaction.TYPE.SUBMIT)
-    public String voteDec(final Context ctx) throws IOException {
+    public String voteSelect(final Context ctx) {
         ChaincodeStub stub = ctx.getStub();
-        String voteCount = stub.getStringState("voteCount");
+        String voteCount = readVoteCount(ctx);
         int count;
         if (voteCount != null && !voteCount.isEmpty()) {
             count = Integer.parseInt(voteCount);
@@ -411,6 +408,13 @@ public final class Bswabe implements ContractInterface {
         jsonObject.put("count",count);
         jsonObject.put("cts",ctsJson);
         return jsonObject.toString();
+    }
+
+    @Transaction(intent = Transaction.TYPE.EVALUATE)
+    public String readVoteCount(final Context ctx) {
+        ChaincodeStub stub = ctx.getStub();
+        return stub.getStringState("voteCount");
+        // return JSON.parseObject(aes_json, byte[].class);
     }
 
     private void decNodeFlatten(Element fx, Element lx, BswabePolicy p, BswabePrv prv, BswabePub pub) {
