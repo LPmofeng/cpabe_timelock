@@ -370,9 +370,9 @@ public final class Bswabe implements ContractInterface {
             return "error";
         }
         for (int i = 0; i < userNum; i++) {
-            String pubk = readSMPub(ctx);
-            byte[] sourceData = msg.getBytes();
-            String cipherText = SM2EncDecUtils.encrypt(Util.hexToByte(pubk), sourceData);
+            // String pubk = readSMPub(ctx);
+            // byte[] sourceData = msg.getBytes();
+            // String cipherText = SM2EncDecUtils.encrypt(Util.hexToByte(pubk), sourceData);
             // To simplify the experiment, we only have one ballot box
             // At the same time, we record the number of votes
             String voteCount = stub.getStringState("voteCount");
@@ -384,7 +384,7 @@ public final class Bswabe implements ContractInterface {
             }
             count++;
             stub.putStringState("voteCount", String.valueOf(count));
-            stub.putStringState("vote_ct" + count, cipherText);
+            stub.putStringState("vote_ct" + count, msg);
         }
         Date t2 = new Date();
         long enc_time = t2.getTime() - t1.getTime();

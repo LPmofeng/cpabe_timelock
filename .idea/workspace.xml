@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9ef063f9-6018-407e-bb34-4133eecff2cf" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/demo/contract/Bswabe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/demo/contract/Bswabe.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +104,7 @@
       <recent name="org.bmtac.authority" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CpabeMock.cpabeDemoTest">
+  <component name="RunManager" selected="JUnit.SM2Test.sm2Test">
     <configuration name="LangPolicy" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.demo.cpabe.LangPolicy" />
       <module name="demo.main" />
@@ -204,8 +204,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CpabeMock.cpabeDemoTest" />
         <item itemvalue="JUnit.SM2Test.sm2Test" />
+        <item itemvalue="JUnit.CpabeMock.cpabeDemoTest" />
         <item itemvalue="Gradle.CpabeMock.cpabeDemoTest" />
         <item itemvalue="JUnit.DemoTest.demoTest (1)" />
         <item itemvalue="Application.LangPolicy" />
@@ -306,7 +306,7 @@
       <workItem from="1664116987183" duration="7207000" />
       <workItem from="1664156530288" duration="11155000" />
       <workItem from="1664167817113" duration="1900000" />
-      <workItem from="1664169963363" duration="911000" />
+      <workItem from="1664169963363" duration="3242000" />
     </task>
     <servers />
   </component>

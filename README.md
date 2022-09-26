@@ -62,7 +62,7 @@ sh invoke.sh '{"function":"enc","Args":["foo,bar,fim,2of3,baf,1of2","www.baidu.c
 sh invoke.sh '{"function":"dec","Args":[]}'
 
 # sm
-sh invoke.sh '{"function":"voteEnc","Args":["A","1"]}'
+sh invoke.sh '{"function":"voteEnc","Args":["04f740af405065bc4427e3fee2b41de9d044e0abdce3b0dd7cd1384e162e462e1fb7e1d206d20273324943ddbf19e1f32825e5b2f16d17596cd590ce8ad4e7e35b59606b3caa8f0fb3a7f1bd8e6c38403df9433f111a9b1b644c3b0906e6800f99dee3cf61036e2a47c97f8e","1"]}'
 sh invoke.sh '{"function":"voteDec","Args":[]}'
 ```
 **查看链码日志**
